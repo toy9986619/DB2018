@@ -15,6 +15,8 @@ Route::get('/', function () {
     return view('authtest');
 });
 
+Route::get('/{id}', 'CardController@show');
+
 Route::auth();
 
 Route::get('/home', 'HomeController@index');
