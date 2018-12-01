@@ -33,5 +33,32 @@ class DiscussionRepository
                 // ->limit(5)    
                 ->get(); 
     }
+
+    /**
+     * 新增討論內容和標題
+     * 
+     * 
+     */
+    public function addDiscussion(){
+        
+    }
+
+    /**
+     * 修改討論內容和標題
+     * 
+     * 
+     */
+    public function editDiscussion($id){
+
+    }
+
+    /**
+     * 刪除討論串
+     * 
+     * 
+     */
+    public function delDiscussion($id){
+
+    }
    
 }

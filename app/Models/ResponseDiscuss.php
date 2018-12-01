@@ -11,7 +11,7 @@ class ResponseDiscuss extends BaseModel
     protected $table = 'response';
     
     protected $fillable = [
-        'response_user', 'response_content', 'discussion_id', 'created_at', 'updated_at'
+        'response_user', 'response_content', 'discussion_id'
     ];
 
     protected $hidden = [

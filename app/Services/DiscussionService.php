@@ -25,4 +25,16 @@ class DiscussionService
 
         return $discussion;
     }
+
+    public function addDiscussion(){
+
+    }
+
+    public function editDiscussion($id){
+
+    }
+
+    public function delDiscussion($id){
+        
+    }
 }

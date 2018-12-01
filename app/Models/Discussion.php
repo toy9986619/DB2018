@@ -11,7 +11,7 @@ class Discussion extends BaseModel
     protected $table = 'discussion';
 
     protected $fillable = [
-        'discuss_user', 'title', 'content', 'created_at', 'updated_at' 
+        'discuss_user', 'title', 'content' 
     ];
 
     protected $hidden = [
