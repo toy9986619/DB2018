@@ -12,12 +12,12 @@ class CreateResponseDiscussTable extends Migration
      */
     public function up()
     {
-        Schema::create('response', function (Blueprint $table) {
+        Schema::create('reply', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('response_user', 50)->comment('回覆者');
-            $table->text('response_content')->comment('回覆內容');
-            $table->integer('discussion_id')->unsign();
-            $table->dateTime('created_at')->comment('回覆時間');
+            $table->string('user', 50)->comment('回覆者');
+            $table->text('content')->comment('回覆內容');
+            $table->integer('article_id')->unsign();
+            $table->dateTime('created_at');
             $table->dateTime('updated_at');
         });
         
@@ -30,6 +30,6 @@ class CreateResponseDiscussTable extends Migration
      */
     public function down()
     {
-        Schema::drop('response');     
+        Schema::drop('reply');     
     }
 }

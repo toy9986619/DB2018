@@ -11,21 +11,21 @@ class TestingDiscussSeeder extends Seeder
      */
     public function run()
     {
-        $discussion = App\Models\Discussion::create([
-            'discuss_user' => '測試人員',
+        $article = App\Models\Discussion::create([
+            'user' => '測試人員',
             'title' => 'testTitle',
             'content' => 'This is a test content',
         ]);
 
-        $response = App\Models\ResponseDiscuss::create([
-            'response_user' => '測試回覆',
-            'response_content' => 'This is a test response content',
-            'discussion_id' => 1,
+        $reply = App\Models\ResponseDiscuss::create([
+            'user' => '測試回覆',
+            'content' => 'This is a test response content',
+            'article_id' => 1,
         ]);
 
-        DB::transaction(function () use ($discussion, $response){
-            $discussion->save();
-            $response->save();
+        DB::transaction(function () use ($article, $reply){
+            $article->save();
+            $reply->save();
         });
     }
 }

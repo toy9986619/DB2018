@@ -9,13 +9,13 @@ use App\Services\DiscussionService;
 
 class DiscussController extends Controller
 {
-    protected $discussionService;
+    protected $articleService;
 
     /**
      * 建構子
      */
-    public function __construct(DiscussionService $discussionService){
-        $this->discussionService = $discussionService;
+    public function __construct(DiscussionService $articleService){
+        $this->articleService = $articleService;
     }
 
     /**
@@ -56,7 +56,7 @@ class DiscussController extends Controller
      */
     public function show()
     {
-        return response()->json(['data' => $this->discussionService->getLatestDiscussion()]);
+        return response()->json(['data' => $this->articleService->getLatestArticle()]);
     }
 
     /**

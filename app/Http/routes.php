@@ -21,4 +21,4 @@ Route::auth();
 
 Route::get('/home', 'HomeController@index');
 
-Route::get('/discussion', 'DiscussController@show');
+Route::get('/article', 'DiscussController@show');

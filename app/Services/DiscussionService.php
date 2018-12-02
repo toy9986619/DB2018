@@ -7,34 +7,34 @@ use App\Repositories\DiscussionRepository;
 class DiscussionService
 {   
     /** @var DiscussionRepository */
-    protected $discussRepo;
+    protected $articleRepo;
 
-    public function __construct(DiscussionRepository $discussRepo){
-        $this->discussRepo = $discussRepo;
+    public function __construct(DiscussionRepository $articleRepo){
+        $this->articleRepo = $articleRepo;
     }
 
 
-    public function getDiscussion(){
-        $discussion = $this->discussRepo->getDiscussion();
+    public function getArticle(){
+        $article = $this->rticleRepo->getArticle();
 
-        return $discussion;
+        return $article;
     }
 
-    public function getLatestDiscussion(){
-        $discussion = $this->discussRepo->getLatestDiscussion();
+    public function getLatestArticle(){
+        $article = $this->articleRepo->getLatestArticle();
 
-        return $discussion;
+        return $article;
     }
 
-    public function addDiscussion(){
-
-    }
-
-    public function editDiscussion($id){
+    public function addArticle(){
 
     }
 
-    public function delDiscussion($id){
+    public function editArticle($id){
+
+    }
+
+    public function delArticle($id){
         
     }
 }

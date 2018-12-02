@@ -8,10 +8,10 @@ class Discussion extends BaseModel
 {
     public $timestamps = true;
 
-    protected $table = 'discussion';
+    protected $table = 'article';
 
     protected $fillable = [
-        'discuss_user', 'title', 'content' 
+        'user', 'title', 'content' 
     ];
 
     protected $hidden = [
@@ -23,8 +23,8 @@ class Discussion extends BaseModel
      * 
      * @return App\models\ResponseDiscuss
      */
-    public function response_discuss(){
-        return $this->hasMany('App\Models\ResponseDiscuss', 'discussion_id', 'id');
+    public function reply_id(){
+        return $this->hasMany('App\Models\ResponseDiscuss', 'article_id');
     }
 
 }

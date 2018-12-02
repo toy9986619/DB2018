@@ -12,12 +12,12 @@ class CreateDiscussionTable extends Migration
      */
     public function up()
     {
-        Schema::create('discussion', function (Blueprint $table) {
+        Schema::create('article', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('discuss_user', 50)->comment('發文者');
+            $table->string('user', 50)->comment('發文者');
             $table->text('title')->comment('標題');
             $table->longText('content')->comment('內容');
-            $table->dateTime('created_at')->comment('發文時間');
+            $table->dateTime('created_at');
             $table->dateTime('updated_at');
         });
     }
@@ -29,6 +29,6 @@ class CreateDiscussionTable extends Migration
      */
     public function down()
     {
-        Schema::drop('discussion');
+        Schema::drop('article');
     }
 }

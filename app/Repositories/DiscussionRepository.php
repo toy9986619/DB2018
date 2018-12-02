@@ -6,10 +6,10 @@ use App\Models\Discussion;
 
 class DiscussionRepository
 {
-    protected $discussion;
+    protected $article;
 
-    public function __construct(Discussion $discussion){
-        $this->discussion = $discussion;
+    public function __construct(Discussion $article){
+        $this->article = $article;
     }
 
     /**
@@ -17,8 +17,8 @@ class DiscussionRepository
      *
      * @return App\Models\Discussion
      */
-    public function getDiscussion(){
-        return $this->discussion->all();
+    public function getArticle(){
+        return $this->article->all();
     }
 
     /**
@@ -26,9 +26,9 @@ class DiscussionRepository
      * 
      * @return App\Models\Discussion的最新5筆資料
      */
-    public function getLatestDiscussion(){
-        return $this->discussion
-                ->with('response_discuss')
+    public function getLatestArticle(){
+        return $this->article
+                ->with('reply_id')
                 ->orderby('id', 'desc')
                 // ->limit(5)    
                 ->get(); 
@@ -39,7 +39,7 @@ class DiscussionRepository
      * 
      * 
      */
-    public function addDiscussion(){
+    public function addArticle(){
         
     }
 
@@ -48,7 +48,7 @@ class DiscussionRepository
      * 
      * 
      */
-    public function editDiscussion($id){
+    public function editArticle($id){
 
     }
 
@@ -57,7 +57,7 @@ class DiscussionRepository
      * 
      * 
      */
-    public function delDiscussion($id){
+    public function delArticle($id){
 
     }
    

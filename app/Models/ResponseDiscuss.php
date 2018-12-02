@@ -8,14 +8,14 @@ class ResponseDiscuss extends BaseModel
 {
     public $timestamps = true;
 
-    protected $table = 'response';
+    protected $table = 'reply';
     
     protected $fillable = [
-        'response_user', 'response_content', 'discussion_id'
+        'user', 'content', 'article_id'
     ];
 
     protected $hidden = [
-        'updated_at', 'discussion_id'
+        'updated_at', 'article_id'
     ];
 
     /**
