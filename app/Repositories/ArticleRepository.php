@@ -28,7 +28,7 @@ class ArticleRepository
      */
     public function getLatestArticle(){
         return $this->article
-                ->with('reply_id')
+                ->with('reply')
                 ->orderby('id', 'desc')
                 // ->limit(5)    
                 ->get(); 

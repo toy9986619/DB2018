@@ -15,12 +15,13 @@ class TestingArticleSeeder extends Seeder
             'user' => '測試人員',
             'title' => 'testTitle',
             'content' => 'This is a test content',
+            'card_id' => 1
         ]);
 
         $reply = App\Models\Reply::create([
             'user' => '測試回覆',
             'content' => 'This is a test response content',
-            'article_id' => 1,
+            'article_id' => 1
         ]);
 
         DB::transaction(function () use ($article, $reply){

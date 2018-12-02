@@ -11,11 +11,11 @@ class Article extends BaseModel
     protected $table = 'article';
 
     protected $fillable = [
-        'user', 'title', 'content' 
+        'user', 'title', 'content', 'card_id' 
     ];
 
     protected $hidden = [
-        'updated_at'
+        'card_id', 'updated_at'
     ];
 
     /**
@@ -23,7 +23,7 @@ class Article extends BaseModel
      * 
      * @return App\models\Reply
      */
-    public function reply_id(){
+    public function reply(){
         return $this->hasMany('App\Models\Reply', 'article_id');
     }
 

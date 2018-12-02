@@ -23,7 +23,7 @@ class CardRepository
 
     public function getCardById($id){
         return $this->card
-                ->with('race', 'series', 'active_skill', 'leader_skill')
+                ->with('race', 'series', 'active_skill', 'leader_skill', 'article')
                 ->where('id', '=', $id)
                 ->get();
     }

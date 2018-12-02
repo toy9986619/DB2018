@@ -51,4 +51,15 @@ class Card extends BaseModel
     public function leader_skill(){
         return $this->hasOne('App\Models\LeaderSkill', 'id', 'leader_skill_id');
     }
+
+    /**
+     * 取得 文章 模型
+     * 
+     * @return App\Models\Article
+     */
+    public function article(){
+        return $this->hasMany('App\Models\Article', 'card_id')
+                    ->with('reply')
+                    ->orderby('id', 'desc');
+    }
 }
