@@ -3,7 +3,7 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateDiscussionTable extends Migration
+class CreateReplyTable extends Migration
 {
     /**
      * Run the migrations.
@@ -12,14 +12,15 @@ class CreateDiscussionTable extends Migration
      */
     public function up()
     {
-        Schema::create('article', function (Blueprint $table) {
+        Schema::create('reply', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('user', 50)->comment('發文者');
-            $table->text('title')->comment('標題');
-            $table->longText('content')->comment('內容');
+            $table->string('user', 50)->comment('回覆者');
+            $table->text('content')->comment('回覆內容');
+            $table->integer('article_id')->unsign();
             $table->dateTime('created_at');
             $table->dateTime('updated_at');
         });
+        
     }
 
     /**
@@ -29,6 +30,6 @@ class CreateDiscussionTable extends Migration
      */
     public function down()
     {
-        Schema::drop('article');
+        Schema::drop('reply');     
     }
 }

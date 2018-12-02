@@ -2,20 +2,20 @@
 
 namespace App\Repositories;
 
-use App\Models\Discussion;
+use App\Models\Article;
 
-class DiscussionRepository
+class ArticleRepository
 {
     protected $article;
 
-    public function __construct(Discussion $article){
+    public function __construct(Article $article){
         $this->article = $article;
     }
 
     /**
      * 取得所有討論資料
      *
-     * @return App\Models\Discussion
+     * @return App\Models\Article
      */
     public function getArticle(){
         return $this->article->all();
@@ -24,7 +24,7 @@ class DiscussionRepository
     /**
      * 回傳最新的5個討論
      * 
-     * @return App\Models\Discussion的最新5筆資料
+     * @return App\Models\Article的最新5筆資料
      */
     public function getLatestArticle(){
         return $this->article

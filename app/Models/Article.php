@@ -4,7 +4,7 @@ namespace App\Models;
 
 use App\Models\BaseModel;
 
-class Discussion extends BaseModel
+class Article extends BaseModel
 {
     public $timestamps = true;
 
@@ -21,10 +21,10 @@ class Discussion extends BaseModel
     /**
      * 取得 回覆 模型
      * 
-     * @return App\models\ResponseDiscuss
+     * @return App\models\Reply
      */
     public function reply_id(){
-        return $this->hasMany('App\Models\ResponseDiscuss', 'article_id');
+        return $this->hasMany('App\Models\Reply', 'article_id');
     }
 
 }

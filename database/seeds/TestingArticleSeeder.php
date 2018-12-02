@@ -2,7 +2,7 @@
 
 use Illuminate\Database\Seeder;
 
-class TestingDiscussSeeder extends Seeder
+class TestingArticleSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -11,13 +11,13 @@ class TestingDiscussSeeder extends Seeder
      */
     public function run()
     {
-        $article = App\Models\Discussion::create([
+        $article = App\Models\Article::create([
             'user' => '測試人員',
             'title' => 'testTitle',
             'content' => 'This is a test content',
         ]);
 
-        $reply = App\Models\ResponseDiscuss::create([
+        $reply = App\Models\Reply::create([
             'user' => '測試回覆',
             'content' => 'This is a test response content',
             'article_id' => 1,

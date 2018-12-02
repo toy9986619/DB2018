@@ -4,7 +4,7 @@ namespace App\Models;
 
 use App\Models\BaseModel;
 
-class ResponseDiscuss extends BaseModel
+class Reply extends BaseModel
 {
     public $timestamps = true;
 
@@ -21,9 +21,9 @@ class ResponseDiscuss extends BaseModel
     /**
      * 回傳 回覆到討論 模型
      * 
-     * @return App\Models\Discussion
+     * @return App\Models\Article
      */
-    // public function discussion(){
-    //     return $this->belongsTo('App\Models\Discussion');
+    // public function article(){
+    //     return $this->belongsTo('App\Models\Article');
     // }
 }

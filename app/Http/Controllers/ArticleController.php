@@ -5,16 +5,16 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
-use App\Services\DiscussionService;
+use App\Services\ArticleService;
 
-class DiscussController extends Controller
+class ArticleController extends Controller
 {
     protected $articleService;
 
     /**
      * 建構子
      */
-    public function __construct(DiscussionService $articleService){
+    public function __construct(ArticleService $articleService){
         $this->articleService = $articleService;
     }
 

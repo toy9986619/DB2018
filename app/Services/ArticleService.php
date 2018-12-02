@@ -2,20 +2,20 @@
 
 namespace App\Services;
 
-use App\Repositories\DiscussionRepository;
+use App\Repositories\ArticleRepository;
 
-class DiscussionService
+class ArticleService
 {   
-    /** @var DiscussionRepository */
+    /** @var ArticleRepository */
     protected $articleRepo;
 
-    public function __construct(DiscussionRepository $articleRepo){
+    public function __construct(ArticleRepository $articleRepo){
         $this->articleRepo = $articleRepo;
     }
 
 
     public function getArticle(){
-        $article = $this->rticleRepo->getArticle();
+        $article = $this->articleRepo->getArticle();
 
         return $article;
     }
