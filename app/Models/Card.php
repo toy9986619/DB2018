@@ -59,7 +59,7 @@ class Card extends BaseModel
      */
     public function article(){
         return $this->hasMany('App\Models\Article', 'card_id')
-                    ->with('reply')
+                    ->with('user', 'reply.user')
                     ->orderby('id', 'desc');
     }
 }

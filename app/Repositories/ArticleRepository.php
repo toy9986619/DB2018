@@ -1,5 +1,8 @@
 <?php
-
+/**
+ * ArticleRepository中的 Function只作用在http://localhost:xxxx/article
+ * 
+ */
 namespace App\Repositories;
 
 use App\Models\Article;
@@ -28,7 +31,7 @@ class ArticleRepository
      */
     public function getLatestArticle(){
         return $this->article
-                ->with('reply.user', 'user')
+                ->with('user', 'reply.user')
                 ->orderby('id', 'desc')
                 // ->limit(5)    
                 ->get(); 
