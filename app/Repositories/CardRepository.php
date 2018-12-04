@@ -6,6 +6,7 @@ use App\Models\Card;
 
 class CardRepository
 {
+    /** @var Card */
     protected $card;
 
     public function __construct(Card $card){
@@ -24,6 +25,9 @@ class CardRepository
     public function getCardById($id){
         return $this->card
                 ->with('race', 'series', 'active_skill', 'leader_skill', 'article')
+                ->with(['article' => function($query){
+                    $query->with('user', 'reply.user');
+                }])
                 ->where('id', '=', $id)
                 ->get();
     }

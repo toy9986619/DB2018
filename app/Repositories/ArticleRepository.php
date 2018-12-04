@@ -9,6 +9,7 @@ use App\Models\Article;
 
 class ArticleRepository
 {
+    /** @var Article */
     protected $article;
 
     public function __construct(Article $article){

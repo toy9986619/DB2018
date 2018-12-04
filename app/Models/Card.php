@@ -58,8 +58,6 @@ class Card extends BaseModel
      * @return App\Models\Article
      */
     public function article(){
-        return $this->hasMany('App\Models\Article', 'card_id')
-                    ->with('user', 'reply.user')
-                    ->orderby('id', 'desc');
+        return $this->hasMany('App\Models\Article', 'card_id', 'id');
     }
 }
