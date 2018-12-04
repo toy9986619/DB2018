@@ -11,20 +11,29 @@ class Article extends BaseModel
     protected $table = 'article';
 
     protected $fillable = [
-        'user', 'title', 'content', 'card_id' 
+        'user_id', 'title', 'content', 'card_id' 
     ];
 
     protected $hidden = [
-        'card_id', 'updated_at'
+        'card_id', 'user_id'
     ];
 
     /**
      * 取得 回覆 模型
      * 
-     * @return App\models\Reply
+     * @return App\Models\Reply
      */
     public function reply(){
         return $this->hasMany('App\Models\Reply', 'article_id');
+    }
+
+    /**
+     * 取得 使用者 模型 一對一關聯
+     *
+     * @return App\Models\User
+     */
+    public function user(){
+        return $this->hasOne('App\Models\User', 'id', 'user_id');
     }
 
 }

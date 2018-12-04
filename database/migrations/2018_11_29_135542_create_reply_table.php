@@ -14,7 +14,7 @@ class CreateReplyTable extends Migration
     {
         Schema::create('reply', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('user', 50)->comment('回覆者');
+            $table->integer('user_id')->unsigned()->comment('回覆者');
             $table->text('content')->comment('回覆內容');
             $table->integer('article_id')->unsign();
             $table->dateTime('created_at');

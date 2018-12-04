@@ -11,11 +11,11 @@ class Reply extends BaseModel
     protected $table = 'reply';
     
     protected $fillable = [
-        'user', 'content', 'article_id'
+        'user_id', 'content', 'article_id'
     ];
 
     protected $hidden = [
-        'updated_at', 'article_id'
+        'create_at', 'article_id', 'user_id'
     ];
 
     /**
@@ -26,4 +26,13 @@ class Reply extends BaseModel
     // public function article(){
     //     return $this->belongsTo('App\Models\Article');
     // }
+
+    /**
+     * 取得 使用者 模型 一對一關聯
+     *
+     * @return App\Models\User
+     */
+    public function user(){
+        return $this->hasOne('App\Models\User', 'id', 'user_id');
+    }
 }

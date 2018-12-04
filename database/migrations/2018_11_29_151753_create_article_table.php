@@ -14,7 +14,7 @@ class CreateArticleTable extends Migration
     {
         Schema::create('article', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('user', 50)->comment('發文者');
+            $table->integer('user_id')->unsigned()->comment('發文者');
             $table->text('title')->comment('標題');
             $table->longText('content')->comment('內容');
             $table->integer('card_id')->unsign();
