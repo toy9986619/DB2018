@@ -12,6 +12,7 @@
     "laravel-elixir-browsersync-official": "^1.0.0",
     "laravel-elixir-vue": "^0.1.8",
     "laravel-elixir-webpack-official": "^1.0.10",
+    "lodash": "^4.17.11",
     "vue": "^2.5.17",
     "vue-axios": "^2.1.4",
     "vue-resource": "^1.5.1",
