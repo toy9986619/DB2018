@@ -12,7 +12,10 @@ class DatabaseSeeder extends Seeder
     public function run()
     {
         $this->call(AdminAccountSeeder::class);
-        $this->call(TestingCardSeeder::class);
         $this->call(TestingArticleSeeder::class);
+
+        $this->call(ActiveSkillSeeder::class);
+        $this->call(LeaderSkillSeeder::class);
+        $this->call(CardSeeder::class);
     }
 }
