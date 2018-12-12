@@ -15,7 +15,9 @@ Route::get('/', function () {
     return view('authtest');
 });
 
-Route::get('card/{id}', 'CardController@show');
+Route::get('/card/{id}', 'CardController@show');
+Route::get('/card', 'CardController@index');
+Route::get('/gallery', 'CardController@gallery');
 
 Route::auth();
 

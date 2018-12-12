@@ -9,13 +9,20 @@ use App\Services\CardService;
 
 class CardController extends Controller
 {
+    /** @var CardService */
     protected $cardService;
-
+    
     /**
      * 建構子
      */
     public function __construct(CardService $cardService){
         $this->cardService = $cardService;
+
+    }
+
+    public function gallery()
+    {
+        return view('card');
     }
 
     /**
@@ -23,9 +30,16 @@ class CardController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        //
+        $filter_data = $request->all();
+
+        $cards = $this->cardService->getCardsId($filter_data);
+        $count = count($cards);
+        return response()->json(
+                ['count' => $count,
+                'cards' => $cards
+                ], 200, $this->header, JSON_UNESCAPED_UNICODE);
     }
 
     /**
@@ -57,7 +71,8 @@ class CardController extends Controller
      */
     public function show($id)
     {
-        return response()->json(['data' => $this->cardService->getCardById($id)]);
+        return response()->json(['data' => $this->cardService->getCardById($id)], 
+                200, $this->header, JSON_UNESCAPED_UNICODE);
     }
 
     /**
