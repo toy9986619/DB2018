@@ -18,6 +18,7 @@ Route::get('/', function () {
 Route::get('/card/{id}', 'CardController@show');
 Route::get('/card', 'CardController@index');
 Route::get('/gallery', 'CardController@gallery');
+Route::get('/cardInfo/{id}', 'CardController@cardInfo');
 
 Route::auth();
 

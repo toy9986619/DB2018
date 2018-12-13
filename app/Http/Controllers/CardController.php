@@ -22,7 +22,12 @@ class CardController extends Controller
 
     public function gallery()
     {
-        return view('card');
+        return view('gallery');
+    }
+
+    public function cardInfo()
+    {
+        return view('cardInfo');
     }
 
     /**
@@ -71,7 +76,7 @@ class CardController extends Controller
      */
     public function show($id)
     {
-        return response()->json(['data' => $this->cardService->getCardById($id)], 
+        return response()->json(['card' => $this->cardService->getCardById($id)], 
                 200, $this->header, JSON_UNESCAPED_UNICODE);
     }
 

@@ -34,8 +34,7 @@ class CardRepository
                 ->with(['article' => function($query){
                     $query->with('user', 'reply.user');
                 }])
-                ->where('id', '=', $id)
-                ->get();
+                ->find($id);
     }
 
     /**
