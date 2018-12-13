@@ -11,7 +11,7 @@
     <div>
         <ul class="gallery" v-if="cards.length > 0">
             <li v-for="card in cards" :key="card.id">
-                <a :href="'/cardInfo/' + card.id">
+                <a :href="'/gallery/' + card.id">
                     <img :src="getIconUrl(card.id)" :style="'width:50px; height:50px;'">
                 </a>
             </li>
