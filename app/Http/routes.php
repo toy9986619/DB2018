@@ -22,3 +22,13 @@ Route::auth();
 Route::get('/home', 'HomeController@index');
 
 Route::get('/article', 'ArticleController@show');
+
+Route::post('/article', 'ArticleController@store');
+
+Route::get('/article/{id}', 'ArticleController@edit');
+
+Route::post('/article/{id}', 'ArticleController@update');
+
+Route::delete('/article/{id}', 'ArticleController@distory');
+
+

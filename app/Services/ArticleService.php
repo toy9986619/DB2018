@@ -26,15 +26,21 @@ class ArticleService
         return $article;
     }
 
-    public function addArticle(){
-
+    public function addArticle($request){
+        $this->articleRepo->addArticle($request->user_id, $request->title, $request->content, $request->card_id);
     }
 
     public function editArticle($id){
+        $article = $this->articleRepo->editArticle($id);
 
+        return $article;
+    }
+
+    public function updateArticle($id, $request){
+        $this->articleRepo->updateArticle($id, $request->title, $request->content);
     }
 
     public function delArticle($id){
-        
+        $this->articleRepo->delArticle($id);
     }
 }

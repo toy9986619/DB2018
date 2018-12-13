@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Http\Requests;
 use App\Services\ArticleService;
 
+
 class ArticleController extends Controller
 {
     protected $articleService;
@@ -46,7 +47,8 @@ class ArticleController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        request()->$this->articleService->addArticle($request);
+        return response()->json(['data'=> $this->articleService->getLatestArticle()]);
     }
 
     /**
@@ -67,7 +69,7 @@ class ArticleController extends Controller
      */
     public function edit($id)
     {
-        //
+        return response()->json(['data' => $this->articleService->editArticle($id)]);
     }
 
     /**
@@ -79,7 +81,8 @@ class ArticleController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        request()->$this->articleService->updateArticle($id, $request);
+        return response()->json(['data'=> $this->articleService->getLatestArticle()]);
     }
 
     /**
@@ -90,7 +93,8 @@ class ArticleController extends Controller
      */
     public function destroy($id)
     {
-        //
+        request()->$this->articleService->delArticle($id);
+        return response()->json(['data'=> $this->articleService->getLatestArticle()]);
     }
 
 }
