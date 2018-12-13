@@ -5,18 +5,18 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
-use App\Services\ArticleService;
+use App\Services\ReplyService;
 
 
-class ArticleController extends Controller
+class ReplyController extends Controller
 {
-    protected $articleService;
+    protected $replyService;
 
     /**
      * 建構子
      */
-    public function __construct(ArticleService $articleService){
-        $this->articleService = $articleService;
+    public function __construct(ReplyService $replyService){
+        $this->replyService = $replyService;
     }
 
     /**
@@ -47,9 +47,7 @@ class ArticleController extends Controller
      */
     public function store(Request $request)
     {
-        request()->$this->articleService->addArticle($request);
-        // return response()->json(['data'=> $this->articleService->getLatestArticle()]);
-        return view('authtest');
+        request()->$this->replyService->addReply($request);
     }
 
     /**
@@ -59,7 +57,7 @@ class ArticleController extends Controller
      */
     public function show()
     {
-        return response()->json(['data' => $this->articleService->getLatestArticle()]);
+        return response()->json(['data' => $this->replyService->getReply()]);
     }
 
     /**
@@ -70,7 +68,7 @@ class ArticleController extends Controller
      */
     public function edit($id)
     {
-        return response()->json(['data' => $this->articleService->editArticle($id)]);
+        return response()->json(['data' => $this->replyService->editReply($id)]);
     }
 
     /**
@@ -82,8 +80,7 @@ class ArticleController extends Controller
      */
     public function update(Request $request, $id)
     {
-        request()->$this->articleService->updateArticle($id, $request);
-        return response()->json(['data'=> $this->articleService->getLatestArticle()]);
+        request()->$this->replyService->updateReply($id, $request);
     }
 
     /**
@@ -94,8 +91,7 @@ class ArticleController extends Controller
      */
     public function destroy($id)
     {
-        request()->$this->articleService->delArticle($id);
-        return response()->json(['data'=> $this->articleService->getLatestArticle()]);
+        request()->$this->replyService->delReply($id);
     }
 
 }

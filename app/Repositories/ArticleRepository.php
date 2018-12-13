@@ -60,8 +60,7 @@ class ArticleRepository
      */
     public function editArticle($id){
         return $this->article
-                ->where('id', '=', $id)
-                ->get();
+                ->find($id);
     }
 
     /**
@@ -70,7 +69,7 @@ class ArticleRepository
      * 
      */
     public function updateArticle($id, $title, $content){
-        $this->article = App\Article::where('id', '=', $id);
+        $this->article = $this->article->where('id', '=', $id);
         $this->article->title = $title;
         $this->article->content = $content;
         $this->article->save();
@@ -82,8 +81,9 @@ class ArticleRepository
      * 
      */
     public function delArticle($id){
-        $this->article = App\Article::where('id', '=', $id);
-        $this->article->delete();
+        $this->article
+            ->where('id', '=', $id)
+            ->delete();
     }
    
 }

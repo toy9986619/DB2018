@@ -21,14 +21,34 @@ Route::auth();
 
 Route::get('/home', 'HomeController@index');
 
-Route::get('/article', 'ArticleController@show');
+Route::group(['prefix' => '/article'], function () {
+    Route::get('/', 'ArticleController@show');
 
-Route::post('/article', 'ArticleController@store');
+    Route::post('/', 'ArticleController@store');
 
-Route::get('/article/{id}', 'ArticleController@edit');
+    Route::get('/{id}', 'ArticleController@edit');
 
-Route::post('/article/{id}', 'ArticleController@update');
+    Route::post('/{id}', 'ArticleController@update');
 
-Route::delete('/article/{id}', 'ArticleController@distory');
+    Route::delete('/{id}', 'ArticleController@distory');
+});
+
+Route::group(['prefix' => '/reply'], function() {
+    Route::get('/', 'ReplyController@show');
+
+    Route::post('/', 'ReplyController@store');
+
+    Route::get('/{id}', 'ReplyController@edit');
+
+    Route::post('/{id}', 'ReplyController@update');
+
+    Route::delete('/{id}', 'ReplyController@distory');
+});
+
+Route::get('/test', function () {
+    return view('test');
+});
+
+Route::post('/test', 'ArticleController@store');
 
 
