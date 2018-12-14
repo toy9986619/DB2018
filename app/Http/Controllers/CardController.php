@@ -22,12 +22,12 @@ class CardController extends Controller
 
     public function gallery()
     {
-        return view('gallery');
+        return view('gallery', ['title' => '卡片目錄']);
     }
 
     public function cardInfo()
     {
-        return view('cardInfo');
+        return view('cardInfo', ['title' => '卡片資料']);
     }
 
     /**
