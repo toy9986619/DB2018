@@ -47,7 +47,8 @@ class ArticleController extends Controller
      */
     public function store(Request $request)
     {
-        request()->$this->articleService->addArticle($request);
+        $data = $request->all();
+        $this->articleService->addArticle($data);
         // return response()->json(['data'=> $this->articleService->getLatestArticle()]);
         return view('authtest');
     }
@@ -82,7 +83,8 @@ class ArticleController extends Controller
      */
     public function update(Request $request, $id)
     {
-        request()->$this->articleService->updateArticle($id, $request);
+        $data = $request->all();
+        $this->articleService->updateArticle($id, $data);
         return response()->json(['data'=> $this->articleService->getLatestArticle()]);
     }
 
