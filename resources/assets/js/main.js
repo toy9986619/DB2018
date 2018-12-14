@@ -3,6 +3,12 @@ import Vue from 'vue'
 // import VueRouter from 'vue-router'
 import axios from 'axios'
 import VueAxios from 'vue-axios'
+window.jQuery = require('jquery')
+
+require('bootstrap-sass')
+
+// window.Tether = require('tether')
+// require('bootstrap')
 
 // Vue.use(VueRouter)
 Vue.use(VueAxios, axios)

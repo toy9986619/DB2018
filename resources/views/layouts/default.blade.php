@@ -2,7 +2,8 @@
 <html>
 <head>
     <meta charset="UTF-8">
-    <title>{{ $title }}</title>
+    <title>{{ $title or '主頁' }}</title>
+    <link rel=stylesheet type="text/css" href="{{ asset('css/all.css') }}">
 </head>
 <body>
     @section('navbar')
@@ -13,7 +14,6 @@
     <div id="app">
         @yield('content')
     </div>
-
  <script src="{{ asset('js/main.js')}}"></script>
 </body>
 </html>
