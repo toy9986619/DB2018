@@ -45,6 +45,8 @@ Route::group(['prefix' => '/reply'], function() {
     Route::delete('/del/{id}', 'ReplyController@destroy');
 });
 
+Route::get('/user_id', 'UserController@show');
+
 // Route::get('/test', function () {
 //     return view('test');
 // });

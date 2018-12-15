@@ -3,14 +3,16 @@
 namespace App\Services;
 
 use App\Repositories\ReplyRepository;
+use App\Services\UserService;
 
 class ReplyService
 {   
     /** @var ReplyRepository */
     protected $replyRepo;
 
-    public function __construct(ReplyRepository $replyRepo){
+    public function __construct(ReplyRepository $replyRepo, UserService $userService){
         $this->replyRepo = $replyRepo;
+        $this->userService = $userService;
     }
 
 

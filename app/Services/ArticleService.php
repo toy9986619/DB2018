@@ -9,6 +9,7 @@ class ArticleService
 {   
     /** @var ArticleRepository */
     protected $articleRepo;
+    protected $userService;
 
     public function __construct(ArticleRepository $articleRepo, UserService $userService){
         $this->articleRepo = $articleRepo;

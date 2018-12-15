@@ -21,10 +21,11 @@ class UserRepository
      * 
      */
     public function getIdByName($name){
-        return $this->user
-                ->select('id')
+        $userinfo = $this->user
                 ->where('name', '=', $name)
-                ->get();
+                ->take(1)->get();
+                
+        return $userinfo;
     }
    
 }

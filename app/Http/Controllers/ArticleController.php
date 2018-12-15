@@ -11,6 +11,7 @@ use App\Services\ArticleService;
 class ArticleController extends Controller
 {
     protected $articleService;
+    // protected $userService;
 
     /**
      * 建構子
