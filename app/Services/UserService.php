@@ -17,7 +17,7 @@ class UserService
     public function getIdByName($name){
         $user_id = $this->userRepo->getIdByName($name)->toArray();
 
-        return $user_id[0]['id'];
+        return $user_id['id'];
     }
 
 }

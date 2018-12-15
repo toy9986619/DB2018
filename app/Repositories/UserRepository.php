@@ -23,7 +23,7 @@ class UserRepository
     public function getIdByName($name){
         $userinfo = $this->user
                 ->where('name', '=', $name)
-                ->take(1)->get();
+                ->first();
                 
         return $userinfo;
     }
