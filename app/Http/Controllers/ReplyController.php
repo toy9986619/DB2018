@@ -47,7 +47,9 @@ class ReplyController extends Controller
      */
     public function store(Request $request)
     {
-        request()->$this->replyService->addReply($request);
+        $data = $request->all();
+        $this->replyService->addReply($data);
+        return $this->show();
     }
 
     /**
@@ -57,7 +59,8 @@ class ReplyController extends Controller
      */
     public function show()
     {
-        return response()->json(['data' => $this->replyService->getReply()]);
+        $reply = $this->replyService->getReply();
+        return response()->json(['reply' => $reply], 200);
     }
 
     /**
@@ -68,7 +71,8 @@ class ReplyController extends Controller
      */
     public function edit($id)
     {
-        return response()->json(['data' => $this->replyService->editReply($id)]);
+        $reply = $this->replyService->editReply($id);
+        return response()->json(['reply' => $reply], 200);
     }
 
     /**
@@ -80,7 +84,9 @@ class ReplyController extends Controller
      */
     public function update(Request $request, $id)
     {
-        request()->$this->replyService->updateReply($id, $request);
+        $data = $request->all();
+        $this->replyService->updateReply($id, $data);
+        return $this->show();
     }
 
     /**
@@ -91,7 +97,8 @@ class ReplyController extends Controller
      */
     public function destroy($id)
     {
-        request()->$this->replyService->delReply($id);
+        $this->replyService->delReply($id);
+        return $this->show();
     }
 
 }

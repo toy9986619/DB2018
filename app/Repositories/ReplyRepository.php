@@ -31,11 +31,11 @@ class ReplyRepository
      * 
      */
     public function addReply($user_id, $content, $article_id){
-        $this->reply = new Reply;
-        $this->reply->user_id = $user_id;
-        $this->reply->content = $content;
-        $this->reply->article_id = $article_id;
-        $this->reply->save();
+        $reply = new Reply;
+        $reply['user_id'] = $user_id;
+        $reply['content'] = $content;
+        $reply['article_id'] = $article_id;
+        $reply->save();
     }
 
 
@@ -44,9 +44,7 @@ class ReplyRepository
      * 
      */
     public function editReply($id){
-        return $this->reply
-                ->where('id', '=', $id)
-                ->get();
+        return $this->reply->find($id);
     }
 
     /**
@@ -55,9 +53,9 @@ class ReplyRepository
      * 
      */
     public function updateReply($id, $content){
-        $this->reply = $this->reply->where('id', '=', $id);
-        $this->reply->content = $content;
-        $this->reply->save();
+        $reply = $this->reply->find($id);
+        $reply['content'] = $content;
+        $reply->save();
     }
 
     /**
@@ -66,9 +64,7 @@ class ReplyRepository
      * 
      */
     public function delReply($id){
-        $this->reply 
-            ->where('id', '=', $id)
-            ->delete();
+        $this->reply->find($id)->delete();
     }
    
 }

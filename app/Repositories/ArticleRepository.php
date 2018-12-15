@@ -44,13 +44,13 @@ class ArticleRepository
      * 
      */
     public function addArticle($user_id, $title, $content, $card_id){
-        $this->article = new Article;
+        $article = new Article;
         //'user_id', 'title', 'content', 'card_id'
-        $this->article->user_id = $user_id;
-        $this->article->title = $title;
-        $this->article->content = $content;
-        $this->article->card_id = $card_id;
-        $this->article->save();
+        $article['user_id'] = $user_id;
+        $article['title'] = $title;
+        $article['content'] = $content;
+        $article['card_id'] = $card_id;
+        $article->save();
     }
 
 
@@ -69,10 +69,10 @@ class ArticleRepository
      * 
      */
     public function updateArticle($id, $title, $content){
-        $this->article = $this->article->where('id', '=', $id);
-        $this->article->title = $title;
-        $this->article->content = $content;
-        $this->article->save();
+        $article = $this->article->find($id);
+        $article['title'] = $title;
+        $article['content'] = $content;
+        $article->save();
     }
 
     /**
@@ -81,9 +81,7 @@ class ArticleRepository
      * 
      */
     public function delArticle($id){
-        $this->article
-            ->where('id', '=', $id)
-            ->delete();
+        $this->article->find($id)->delete();
     }
    
 }

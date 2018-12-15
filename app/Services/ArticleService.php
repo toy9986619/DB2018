@@ -26,8 +26,13 @@ class ArticleService
         return $article;
     }
 
-    public function addArticle($request){
-        $this->articleRepo->addArticle($request->user_id, $request->title, $request->content, $request->card_id);
+    public function addArticle($data){
+        $user_id = $data['user_id'];
+        $title = $data['title'];
+        $content = $data['content'];
+        $card_id = $data['card_id'];
+
+        $this->articleRepo->addArticle($user_id, $title, $content, $card_id);
     }
 
     public function editArticle($id){
@@ -36,8 +41,12 @@ class ArticleService
         return $article;
     }
 
-    public function updateArticle($id, $request){
-        $this->articleRepo->updateArticle($id, $request->title, $request->content);
+    public function updateArticle($id, $data){
+        $title = $data['title'];
+        $content = $data['content'];
+
+
+        $this->articleRepo->updateArticle($id, $title, $content);
     }
 
     public function delArticle($id){

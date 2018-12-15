@@ -21,8 +21,12 @@ class ReplyService
     }
 
 
-    public function addReply($request){
-        $this->replyRepo->addReply($request->user_id, $request->content, $request->article_id);
+    public function addReply($data){
+        $user_id = $data['user_id'];
+        $content = $data['content'];
+        $article_id = $data['article_id'];
+
+        $this->replyRepo->addReply($user_id, $content, $article_id);
     }
 
     public function editReply($id){
@@ -31,8 +35,10 @@ class ReplyService
         return $reply;
     }
 
-    public function updateReply($id, $request){
-        $this->replyRepo->updateReply($id, $request->content);
+    public function updateReply($id, $data){
+        $content = $data['content'];
+
+        $this->replyRepo->updateReply($id, $content);
     }
 
     public function delReply($id){

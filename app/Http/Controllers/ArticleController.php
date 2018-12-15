@@ -49,8 +49,7 @@ class ArticleController extends Controller
     {
         $data = $request->all();
         $this->articleService->addArticle($data);
-        // return response()->json(['data'=> $this->articleService->getLatestArticle()]);
-        return view('authtest');
+        return $this->show();
     }
 
     /**
@@ -60,7 +59,9 @@ class ArticleController extends Controller
      */
     public function show()
     {
-        return response()->json(['data' => $this->articleService->getLatestArticle()]);
+        $article = $this->articleService->getLatestArticle();
+        return response()->json(['article' => $article],
+            200);
     }
 
     /**
@@ -71,7 +72,9 @@ class ArticleController extends Controller
      */
     public function edit($id)
     {
-        return response()->json(['data' => $this->articleService->editArticle($id)]);
+        $article = $this->articleService->editArticle($id);
+        return response()->json(['article' => $article],
+            200);
     }
 
     /**
@@ -85,7 +88,7 @@ class ArticleController extends Controller
     {
         $data = $request->all();
         $this->articleService->updateArticle($id, $data);
-        return response()->json(['data'=> $this->articleService->getLatestArticle()]);
+        return $this->show();
     }
 
     /**
@@ -96,8 +99,8 @@ class ArticleController extends Controller
      */
     public function destroy($id)
     {
-        request()->$this->articleService->delArticle($id);
-        return response()->json(['data'=> $this->articleService->getLatestArticle()]);
+        $this->articleService->delArticle($id);
+        return $this->show();
     }
 
 }

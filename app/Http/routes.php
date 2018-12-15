@@ -24,31 +24,31 @@ Route::get('/home', 'HomeController@index');
 Route::group(['prefix' => '/article'], function () {
     Route::get('/', 'ArticleController@show');
 
-    Route::post('/', 'ArticleController@store');
+    Route::get('/add', 'ArticleController@store');
 
     Route::get('/{id}', 'ArticleController@edit');
 
-    Route::post('/{id}', 'ArticleController@update');
+    Route::get('/update/{id}', 'ArticleController@update');
 
-    Route::delete('/{id}', 'ArticleController@distory');
+    Route::get('/del/{id}', 'ArticleController@destroy');
 });
 
 Route::group(['prefix' => '/reply'], function() {
     Route::get('/', 'ReplyController@show');
 
-    Route::post('/', 'ReplyController@store');
+    Route::post('/add', 'ReplyController@store');
 
     Route::get('/{id}', 'ReplyController@edit');
 
-    Route::post('/{id}', 'ReplyController@update');
+    Route::post('/update{id}', 'ReplyController@update');
 
-    Route::delete('/{id}', 'ReplyController@distory');
+    Route::delete('/del/{id}', 'ReplyController@destroy');
 });
 
-Route::get('/test', function () {
-    return view('test');
-});
+// Route::get('/test', function () {
+//     return view('test');
+// });
 
-Route::post('/test', 'ArticleController@store');
+// Route::post('/test', 'ArticleController@store');
 
 
