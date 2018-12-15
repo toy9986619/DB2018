@@ -3,14 +3,16 @@
 namespace App\Services;
 
 use App\Repositories\ArticleRepository;
+use App\Services\UserService;
 
 class ArticleService
 {   
     /** @var ArticleRepository */
     protected $articleRepo;
 
-    public function __construct(ArticleRepository $articleRepo){
+    public function __construct(ArticleRepository $articleRepo, UserService $userService){
         $this->articleRepo = $articleRepo;
+        $this->userService = $userService;
     }
 
 
@@ -27,7 +29,8 @@ class ArticleService
     }
 
     public function addArticle($data){
-        $user_id = $data['user_id'];
+        $user_name = $data['user_name'];
+        $user_id = $this->userService->getIdByName($user_name);
         $title = $data['title'];
         $content = $data['content'];
         $card_id = $data['card_id'];

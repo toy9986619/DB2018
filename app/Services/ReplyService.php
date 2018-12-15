@@ -22,7 +22,8 @@ class ReplyService
 
 
     public function addReply($data){
-        $user_id = $data['user_id'];
+        $user_name = $data['user_name'];
+        $user_id = $this->userService->getIdByName($user_name);
         $content = $data['content'];
         $article_id = $data['article_id'];
 
