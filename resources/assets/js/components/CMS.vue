@@ -7,13 +7,15 @@
         </ul>
     </div>
 
-    <card_cms v-if="management == 'card'"></card_cms>
+    <cms_card v-if="management == 'card'"></cms_card>
+    <cms_account v-if="management == 'account'"></cms_account>
     
 </div>
 </template>
 
 <script>
-import card_cms from "./Card_CMS.vue";
+import cms_card from "./CMS_Card.vue";
+import cms_account from "./CMS_Account.vue"
 
 export default {
     data: function(){
@@ -31,7 +33,8 @@ export default {
     },
 
     components: {
-        card_cms
+        cms_card,
+        cms_account
     }
 }
 </script>
