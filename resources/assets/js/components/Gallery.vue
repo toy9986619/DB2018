@@ -1,17 +1,20 @@
 <template>
 <div class="content">
-    <div>
-        <input type="radio" checked="checked" v-model="attribute_selected" v-on:change="cardFilter()" value="" /><label>不限</label>
-        <input type="radio" v-model="attribute_selected" v-on:change="cardFilter()" value="火" /><label>火</label>
-        <input type="radio" v-model="attribute_selected" v-on:change="cardFilter()" value="水" /><label>水</label>
-        <input type="radio" v-model="attribute_selected" v-on:change="cardFilter()" value="木" /><label>木</label>
-        <input type="radio" v-model="attribute_selected" v-on:change="cardFilter()" value="光" /><label>光</label>
-        <input type="radio" v-model="attribute_selected" v-on:change="cardFilter()" value="暗" /><label>暗</label>
+    <div class="search-area">
+        <div class="attribute">
+            屬性: 
+            <input type="radio" checked="checked" v-model="attribute_selected" v-on:change="cardFilter()" value="" /><label>不限</label>
+            <input type="radio" v-model="attribute_selected" v-on:change="cardFilter()" value="火" /><label>火</label>
+            <input type="radio" v-model="attribute_selected" v-on:change="cardFilter()" value="水" /><label>水</label>
+            <input type="radio" v-model="attribute_selected" v-on:change="cardFilter()" value="木" /><label>木</label>
+            <input type="radio" v-model="attribute_selected" v-on:change="cardFilter()" value="光" /><label>光</label>
+            <input type="radio" v-model="attribute_selected" v-on:change="cardFilter()" value="暗" /><label>暗</label>
+        </div>
     </div>
     <div>
         <ul class="gallery" v-if="cards.length > 0">
             <li v-for="card in cards" :key="card.id">
-                <a :href="'/gallery/' + card.id">
+                <a :href="'/gallery/' + card.id ">
                     <img :src="getIconUrl(card.id)" :style="'width:50px; height:50px;'">
                 </a>
             </li>

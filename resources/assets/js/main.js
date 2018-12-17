@@ -28,7 +28,8 @@ Vue.use(VueAxios, axios)
 // new Vue(Vue.util.extend({ router }, App)).$mount('#app')
 
 Vue.component('gallery', require('./components/Gallery.vue'));
-Vue.component('card_info', require('./components/CardInfo.vue'));    
+Vue.component('card_info', require('./components/CardInfo.vue'));
+Vue.component('cms', require('./components/CMS.vue'));
 
 const app = new Vue({
     el: '#app'

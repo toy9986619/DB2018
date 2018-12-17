@@ -7649,7 +7649,7 @@ button.close {
   }
 }
 
-#app {
+.content {
   width: 1100px;
   height: auto;
   margin: auto;
