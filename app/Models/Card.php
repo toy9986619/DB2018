@@ -7,14 +7,14 @@ use App\Models\BaseModel;
 class Card extends BaseModel
 {
     protected $fillable = [
-        'name', 'attribute', 'race_id', 'series_id', 'rarity', 'cost', 'exp_curve',
+        'id', 'name', 'attribute', 'race_id', 'series_id', 'rarity', 'cost', 'exp_curve',
         'max_exp', 'min_level', 'min_hp', 'min_atk', 'min_rec', 'max_level',
         'max_hp', 'max_atk', 'max_rec', 'active_skill_id', 'leader_skill_id'
     ];
 
-    protected $hidden = [
-        'race_id', 'series_id', 'active_skill_id', 'leader_skill_id',
-    ];
+    // protected $hidden = [
+    //     'race_id', 'series_id', 'active_skill_id', 'leader_skill_id',
+    // ];
 
     /**
      * 取得 種族 模型

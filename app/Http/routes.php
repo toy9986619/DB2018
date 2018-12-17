@@ -19,6 +19,9 @@ Route::get('/card/{id}', 'CardController@show');
 Route::get('/card', 'CardController@index');
 Route::get('/gallery', 'CardController@gallery');
 Route::get('/gallery/{id}', 'CardController@cardInfo');
+Route::get('/cms', 'CMSController@index');
+Route::get('/activeskill', 'ActiveSkillController@index');
+Route::get('/leaderskill', 'LeaderSkillController@index');
 
 Route::auth();
 

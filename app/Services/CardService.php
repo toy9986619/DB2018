@@ -25,10 +25,16 @@ class CardService
         return $card;
     }
 
-    public function getCardsId($filter_data){
+    /**
+     * 依據篩選條件 取得篩選後卡片id 與 名稱
+     *
+     * @param array $filter_data
+     * @return App\Models\Card
+     */
+    public function getCardsList($filter_data){
         $attribute = $filter_data['attribute'];
 
-        $cards = $this->cardRepo->getCardsId($attribute);
+        $cards = $this->cardRepo->getCardsList($attribute);
 
         return $cards;
     }
@@ -37,5 +43,27 @@ class CardService
         $count = $this->cardRepo->getCardDataCount();
 
         return $count;
+    }
+
+    /**
+     * 依據輸入資料 新增卡片
+     *
+     * @param array $input_data
+     * @return void
+     */
+    public function insertCard($input_data){
+        $card_data = $input_data['card'];
+
+        $this->cardRepo->insertCard($card_data);
+    }
+
+    public function updateCard($input_data){
+        $card_data = $input_data['card'];
+
+        $id = $card_data['id'];
+        unset($card_data['id']);
+        $update_data = $card_data;
+
+        $this->cardRepo->updateCard($id, $update_data);
     }
 }

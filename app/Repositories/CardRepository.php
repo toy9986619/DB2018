@@ -38,12 +38,12 @@ class CardRepository
     }
 
     /**
-     * 取得 卡片資料集的編號
+     * 取得 卡片資料集的編號 與 名稱
      *
      * @return void
      */
-    public function getCardsId($attribute){
-        $query = $this->card->select('id');
+    public function getCardsList($attribute){
+        $query = $this->card->select('id', 'name');
         
         if($attribute != ""){
             $query = $query->where('attribute', '=', $attribute);
@@ -54,5 +54,13 @@ class CardRepository
 
     public function getCardDataCount(){
         return $this->card->all()->count();
+    }
+
+    public function insertCard($card_data){
+        $card = $this->card->create($card_data);
+    }
+
+    public function updateCard($id, $card_data){
+        $card = $this->card->find($id)->update($card_data);
     }
 }

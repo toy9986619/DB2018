@@ -5,29 +5,15 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
-use App\Services\CardService;
+use App\Services\ActiveSkillService;
 
-class CardController extends Controller
+class ActiveSkillController extends Controller
 {
-    /** @var CardService */
-    protected $cardService;
-    
-    /**
-     * 建構子
-     */
-    public function __construct(CardService $cardService){
-        $this->cardService = $cardService;
+    /** @var ActiveSkillService */
+    protected $activeSkillService;
 
-    }
-
-    public function gallery()
-    {
-        return view('gallery', ['title' => '卡片目錄']);
-    }
-
-    public function cardInfo()
-    {
-        return view('cardInfo', ['title' => '卡片資料']);
+    public function __construct(ActiveSkillService $activeSkillService){
+        $this->activeSkillService = $activeSkillService;
     }
 
     /**
@@ -35,16 +21,10 @@ class CardController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(Request $request)
+    public function index()
     {
-        $filter_data = $request->all();
-
-        $cards = $this->cardService->getCardsList($filter_data);
-        $count = count($cards);
-        return response()->json(
-                ['count' => $count,
-                'cards' => $cards
-                ], 200, $this->header, JSON_UNESCAPED_UNICODE);
+        return response()->json(["list" => $this->activeSkillService->getAllActiveSkill()],
+                    200, $this->header, JSON_UNESCAPED_UNICODE);
     }
 
     /**
@@ -76,8 +56,7 @@ class CardController extends Controller
      */
     public function show($id)
     {
-        return response()->json(['card' => $this->cardService->getCardById($id)], 
-                200, $this->header, JSON_UNESCAPED_UNICODE);
+        //
     }
 
     /**
