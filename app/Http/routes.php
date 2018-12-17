@@ -17,6 +17,8 @@ Route::get('/', function () {
 
 Route::get('/card/{id}', 'CardController@show');
 Route::get('/card', 'CardController@index');
+Route::get('/card/{id}/edit', 'CardController@edit');
+Route::put('/card/{id}', 'CardController@update');
 Route::get('/gallery', 'CardController@gallery');
 Route::get('/gallery/{id}', 'CardController@cardInfo');
 Route::get('/cms', 'CMSController@index');

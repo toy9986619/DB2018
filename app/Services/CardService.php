@@ -26,6 +26,18 @@ class CardService
     }
 
     /**
+     * 依據id 取得編輯表單的卡片資量
+     *
+     * @param int $id
+     * @return App\Models\Card
+     */
+    public function getCardFormDataById($id){
+        $card = $this->cardRepo->getCardFormDataById($id);
+
+        return $card;
+    }
+
+    /**
      * 依據篩選條件 取得篩選後卡片id 與 名稱
      *
      * @param array $filter_data

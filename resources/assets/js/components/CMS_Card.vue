@@ -23,6 +23,7 @@
         <div slot="header">
             <h3>編輯卡片</h3>
         </div>
+
         <div slot="body">
             <form>
                 <label>卡片編號</label><input v-model="card.id" />
@@ -50,6 +51,11 @@
                     </option>
                 </select>
             </form>
+        </div>
+
+        <div slot="footer">
+            <button class="modal-default-button" @click="updateCard()">更新</button>
+            <button class="modal-default-button" @click="showCardEditModal = false">取消</button>
         </div>
     </modal>
 
@@ -101,7 +107,7 @@ export default {
 
         showCardEdit: function(id){
             let self = this;
-            this.axios.get('/card/' + id)
+            this.axios.get('/card/' + id + '/edit')
                 .then(function(response){
                     self.card = response.data.card;
                     self.active_selected = self.card.active_skill_id;
@@ -142,13 +148,31 @@ export default {
 
         getLeaderSkillList: function(){
             let self = this;
-            this.axios.get('leaderskill')
+            this.axios.get('/leaderskill')
                 .then(function(response){
                     self.leader_skill_list = response.data.list;
                 })
                 .catch(function(response){
                     console.log(response);
                 })
+        },
+
+        updateCard: function(){
+            let self = this;
+            // console.log(this.card);
+
+            this.axios({
+                method: 'put',
+                url: '/card/' + self.card.id,
+                data: {
+                    'card': self.card
+                },
+            }).then(function(response){
+                self.showCardEditModal = false;
+                console.log("完成");
+            }).catch(function(response){
+                console.log(response);
+            });
         }
     },
 

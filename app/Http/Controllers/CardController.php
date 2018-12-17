@@ -88,7 +88,8 @@ class CardController extends Controller
      */
     public function edit($id)
     {
-        //
+        return response()->json(['card' => $this->cardService->getCardFormDataById($id)],
+                200, $this->header, JSON_UNESCAPED_UNICODE);
     }
 
     /**
@@ -100,7 +101,10 @@ class CardController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $card_data = $request->all();
+        $this->cardService->updateCard($card_data);
+
+        return response()->json(['status'=>'OK'], 200, $this->header);
     }
 
     /**

@@ -14,7 +14,7 @@ class CardRepository
     }
 
     /**
-     * 取得所有卡片資料
+     * 取得 所有卡片資料
      *
      * @return App\Models\Card
      */
@@ -23,18 +23,28 @@ class CardRepository
     }
 
     /**
-     * 取得卡片的詳細資料
+     * 取得 卡片的詳細資料 (含關聯實體)
      *
      * @param int $id
      * @return App\Models\Card
      */
     public function getCardById($id){
         return $this->card
-                ->with('race', 'series', 'active_skill', 'leader_skill', 'article')
-                ->with(['article' => function($query){
-                    $query->with('user', 'reply.user');
-                }])
+                ->with('race', 'series', 'active_skill', 'leader_skill')
+                // ->with(['article' => function($query){
+                //     $query->with('user', 'reply.user');
+                // }])
                 ->find($id);
+    }
+
+    /**
+     * 取得 編輯卡片的表單資料
+     *
+     * @param int $id
+     * @return void
+     */
+    public function getCardFormDataById($id){
+        return $this->card->find($id);
     }
 
     /**
