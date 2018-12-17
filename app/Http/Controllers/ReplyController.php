@@ -5,19 +5,18 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
-use App\Services\ArticleService;
+use App\Services\ReplyService;
 
 
-class ArticleController extends Controller
+class ReplyController extends Controller
 {
-    protected $articleService;
-    // protected $userService;
+    protected $replyService;
 
     /**
      * 建構子
      */
-    public function __construct(ArticleService $articleService){
-        $this->articleService = $articleService;
+    public function __construct(ReplyService $replyService){
+        $this->replyService = $replyService;
     }
 
     /**
@@ -49,7 +48,7 @@ class ArticleController extends Controller
     public function store(Request $request)
     {
         $data = $request->all();
-        $this->articleService->addArticle($data);
+        $this->replyService->addReply($data);
         return $this->show();
     }
 
@@ -60,9 +59,8 @@ class ArticleController extends Controller
      */
     public function show()
     {
-        $article = $this->articleService->getLatestArticle();
-        return response()->json(['article' => $article],
-            200);
+        $reply = $this->replyService->getReply();
+        return response()->json(['reply' => $reply], 200);
     }
 
     /**
@@ -73,9 +71,8 @@ class ArticleController extends Controller
      */
     public function edit($id)
     {
-        $article = $this->articleService->editArticle($id);
-        return response()->json(['article' => $article],
-            200);
+        $reply = $this->replyService->editReply($id);
+        return response()->json(['reply' => $reply], 200);
     }
 
     /**
@@ -88,7 +85,7 @@ class ArticleController extends Controller
     public function update(Request $request, $id)
     {
         $data = $request->all();
-        $this->articleService->updateArticle($id, $data);
+        $this->replyService->updateReply($id, $data);
         return $this->show();
     }
 
@@ -100,7 +97,7 @@ class ArticleController extends Controller
      */
     public function destroy($id)
     {
-        $this->articleService->delArticle($id);
+        $this->replyService->delReply($id);
         return $this->show();
     }
 

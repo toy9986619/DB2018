@@ -43,8 +43,24 @@ class ArticleRepository
      * 
      * 
      */
-    public function addArticle(){
-        
+    public function addArticle($user_id, $title, $content, $card_id){
+        $article = new Article;
+        //'user_id', 'title', 'content', 'card_id'
+        $article['user_id'] = $user_id;
+        $article['title'] = $title;
+        $article['content'] = $content;
+        $article['card_id'] = $card_id;
+        $article->save();
+    }
+
+
+    /**
+     * 尋找特定文章
+     * 
+     */
+    public function editArticle($id){
+        return $this->article
+                ->find($id);
     }
 
     /**
@@ -52,8 +68,11 @@ class ArticleRepository
      * 
      * 
      */
-    public function editArticle($id){
-
+    public function updateArticle($id, $title, $content){
+        $article = $this->article->find($id);
+        $article['title'] = $title;
+        $article['content'] = $content;
+        $article->save();
     }
 
     /**
@@ -62,7 +81,7 @@ class ArticleRepository
      * 
      */
     public function delArticle($id){
-
+        $this->article->find($id)->delete();
     }
    
 }
