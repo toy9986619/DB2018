@@ -15,18 +15,26 @@ Route::get('/', function () {
     return view('authtest');
 });
 
-Route::get('/card/{id}', 'CardController@show');
-Route::get('/card', 'CardController@index');
-Route::get('/card/{id}/edit', 'CardController@edit');
-Route::put('/card/{id}', 'CardController@update');
-Route::post('/card', 'CardController@store');
 Route::get('/gallery', 'CardController@gallery');
 Route::get('/gallery/{id}', 'CardController@cardInfo');
+Route::resource('card', 'CardController', ['only' => [
+    'index', 'show', 'edit', 'update', 'store'
+]]);
+
 Route::get('/cms', 'CMSController@index');
-Route::get('/activeskill', 'ActiveSkillController@index');
-Route::get('/leaderskill', 'LeaderSkillController@index');
-Route::get('/series', 'SeriesController@index');
-Route::get('/race', 'RaceController@index');
+
+Route::resource('activeskill', 'ActiveSkillController', ['only' => [
+    'index'
+]]);
+Route::resource('leaderskill', 'LeaderSkillController', ['only' => [
+    'index'
+]]);
+Route::resource('series', 'SeriesController', ['only' => [
+    'index'
+]]);
+Route::resource('race', 'RaceController', ['only' => [
+    'index'
+]]);
 
 Route::auth();
 
