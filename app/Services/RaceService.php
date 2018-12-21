@@ -2,15 +2,19 @@
 
 namespace App\Services;
 
-use App\Repository\RaceRepository;
+use App\Repositories\RaceRepository;
 
 Class RaceService
 {
     /** @var RaceRepository */
     protected $raceRepo;
 
-    public function __contruct(RaceRepository $raceRepo){
+    public function __construct(RaceRepository $raceRepo){
         $this->raceRepo = $raceRepo;
+    }
+
+    public function getAllRace(){
+        return $this->raceRepo->getAllRace();
     }
 
     public function getRaceById($id){

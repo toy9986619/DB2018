@@ -5,9 +5,17 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
+use App\Services\SeriesService;
 
 class SeriesController extends Controller
 {
+    /** @var SericesSerivce */
+    protected $seriesService;
+
+    public function __construct(SeriesService $seriesService){
+        $this->seriesService = $seriesService;
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -15,7 +23,8 @@ class SeriesController extends Controller
      */
     public function index()
     {
-        //
+        return response()->json(['list' => $this->seriesService->getAllSeries()],
+                200, $this->header, JSON_UNESCAPED_UNICODE);
     }
 
     /**

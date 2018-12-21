@@ -5,9 +5,17 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
+use App\Services\RaceService;
 
 class RaceController extends Controller
 {
+    /** @var RaceService */
+    protected $raceService;
+
+    public function __construct(RaceService $raceService){
+        $this->raceService = $raceService;
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -15,7 +23,8 @@ class RaceController extends Controller
      */
     public function index()
     {
-        //
+        return response()->json(['list'=>$this->raceService->getAllRace()],
+            200, $this->header, JSON_UNESCAPED_UNICODE);
     }
 
     /**

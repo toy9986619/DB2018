@@ -9,8 +9,12 @@ Class SeriesRepository
     /** @var Series */
     protected $series;
 
-    public function __contruct(Series $series){
+    public function __construct(Series $series){
         $this->series = $series;
+    }
+
+    public function getAllSeries(){
+        return $this->series->all();
     }
 
     public function getSeriesById($id){

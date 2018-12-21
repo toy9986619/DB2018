@@ -65,7 +65,10 @@ class CardController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $input_data = $request->all();
+        $this->cardService->insertCard($input_data);
+
+        return response()->json(['status'=>'ok'], 200, $this->header);
     }
 
     /**

@@ -13,6 +13,10 @@ Class RaceRepository
         $this->race = $race;
     }
 
+    public function getAllRace(){
+        return $this->race->all();
+    }
+
     public function getRaceById($id){
         return $race->find($id);
     }

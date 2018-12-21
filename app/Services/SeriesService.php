@@ -2,15 +2,19 @@
 
 namespace App\Services;
 
-use App\Repository\SeriesRepository;
+use App\Repositories\SeriesRepository;
 
 Class SeriesService
 {
     /** @var SeriesRepository */
     protected $seriesRepo;
 
-    public function __contruct(SeriesRepository $seriesRepo){
+    public function __construct(SeriesRepository $seriesRepo){
         $this->seriesRepo = $seriesRepo;
+    }
+
+    public function getAllSeries(){
+        return $this->seriesRepo->getAllSeries();
     }
 
     public function getSeriesById($id){
