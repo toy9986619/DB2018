@@ -26,7 +26,9 @@ class ReplyController extends Controller
      */
     public function index()
     {
-        //
+        $reply = $this->replyService->getReply();
+        return response()->json(['reply' => $reply],
+            200, $this->header);
     }
 
     /**
@@ -48,8 +50,11 @@ class ReplyController extends Controller
     public function store(Request $request)
     {
         $data = $request->all();
-        $this->replyService->addReply($data);
-        return $this->show();
+        $this->replyService->addReply($data['reply']);
+        
+        $reply = $this->replyService->getLatestReply($data['reply']['article_id']);
+        return response()->json(['reply' => $reply],
+            200, $this->header);
     }
 
     /**
@@ -60,7 +65,7 @@ class ReplyController extends Controller
     public function show()
     {
         $reply = $this->replyService->getReply();
-        return response()->json(['reply' => $reply], 200);
+        return response()->json(['reply' => $reply], 200, $this->header);
     }
 
     /**
@@ -85,8 +90,8 @@ class ReplyController extends Controller
     public function update(Request $request, $id)
     {
         $data = $request->all();
-        $this->replyService->updateReply($id, $data);
-        return $this->show();
+        $this->replyService->updateReply($id, $data['reply']);
+        return response()->json(['status' => 'OK'], 200, $this->header);
     }
 
     /**
@@ -98,7 +103,19 @@ class ReplyController extends Controller
     public function destroy($id)
     {
         $this->replyService->delReply($id);
-        return $this->show();
+        return response()->json(['status' => 'OK'], 200, $this->header);
+    }
+
+    /**
+     * Remove the specified resource from storage.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function destroyByArticleId($id)
+    {
+        $this->replyService->delAllReply($id);
+        return response()->json(['status' => 'OK'], 200, $this->header);
     }
 
 }

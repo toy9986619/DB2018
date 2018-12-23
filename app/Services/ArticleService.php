@@ -23,8 +23,14 @@ class ArticleService
         return $article;
     }
 
-    public function getLatestArticle(){
-        $article = $this->articleRepo->getLatestArticle();
+    public function getArticleDesc($card_id){
+        $article = $this->articleRepo->getArticleDesc($card_id);
+
+        return $article;
+    }
+
+    public function getLatestArticle($card_id){
+        $article = $this->articleRepo->getLatestArticle($card_id);
 
         return $article;
     }

@@ -22,6 +22,12 @@ class ReplyService
         return $reply;
     }
 
+    public function getLatestReply($article_id){
+        $reply = $this->replyRepo->getLatestReply($article_id);
+
+        return $reply;
+    }
+
 
     public function addReply($data){
         $user_name = $data['user_name'];
@@ -46,5 +52,9 @@ class ReplyService
 
     public function delReply($id){
         $this->replyRepo->delReply($id);
+    }
+
+    public function delAllReply($id){
+        $this->replyRepo->delAllReply($id);
     }
 }

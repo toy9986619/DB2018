@@ -22,7 +22,20 @@ class ReplyRepository
      * @return App\Models\Reply
      */
     public function getReply(){
-        return $this->reply->all();
+        return $this->reply->with('user')->get();
+    }
+
+    /**
+     * 回傳最新的1個回應
+     * 
+     * @return App\Models\Reply的最新1筆資料
+     */
+    public function getLatestReply($article_id){
+        return $this->reply
+                ->with('user')
+                ->where('article_id', '=', $article_id)
+                ->orderby('id', 'desc')
+                ->first(); 
     }
 
     /**
@@ -65,6 +78,10 @@ class ReplyRepository
      */
     public function delReply($id){
         $this->reply->find($id)->delete();
+    }
+
+    public function delAllReply($id){
+        $this->reply->where('article_id', '=', $id)->delete();
     }
    
 }

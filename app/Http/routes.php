@@ -33,30 +33,39 @@ Route::auth();
 Route::get('/home', 'HomeController@index');
 
 Route::group(['prefix' => '/article'], function () {
-    Route::get('/', 'ArticleController@show');
+
+    Route::get('/{id}', 'ArticleController@show');
+
+    Route::get('/', 'ArticleController@index');
 
     Route::post('/', 'ArticleController@store');
 
-    Route::get('/{id}', 'ArticleController@edit');
+    Route::get('/edit/{id}', 'ArticleController@edit');
 
-    Route::put('/{id}', 'ArticleController@update');
+    Route::put('/update/{id}', 'ArticleController@update');
 
-    Route::delete('/{id}', 'ArticleController@destroy');
+    Route::delete('/del/{id}', 'ArticleController@destroy');
+
+    // Route::get('/latest/{id}', 'ArticleController@latest');
 });
 
 Route::group(['prefix' => '/reply'], function() {
-    Route::get('/', 'ReplyController@show');
+    Route::get('/{id}', 'ReplyController@show');
+
+    Route::get('/', 'ReplyController@index');
 
     Route::post('/', 'ReplyController@store');
 
-    Route::get('/{id}', 'ReplyController@edit');
+    Route::get('/edit/{id}', 'ReplyController@edit');
 
-    Route::put('/{id}', 'ReplyController@update');
+    Route::put('/update/{id}', 'ReplyController@update');
 
-    Route::delete('/{id}', 'ReplyController@destroy');
+    Route::delete('/del/{id}', 'ReplyController@destroy');
+
+    Route::delete('/delAll/{id}', 'ReplyController@destroyByArticleId');
 });
 
-// Route::get('/user_id', 'UserController@show');
+// Route::get('/user', 'UserController@show');
 
 
 

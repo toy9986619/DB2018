@@ -21,13 +21,25 @@ class ArticleController extends Controller
     }
 
     /**
+     * get latest article
+     */
+    public function latest($id)
+    {
+        $article = $this->articleService->getLatestArticle($id);
+        return response()->json(['article' => $article],
+            200, $this->header);
+    }
+
+    /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
     public function index()
     {
-        //
+        $article = $this->articleService->getArticle();
+        return response()->json(['article' => $article],
+            200, $this->header);
     }
 
     /**
@@ -49,8 +61,11 @@ class ArticleController extends Controller
     public function store(Request $request)
     {
         $data = $request->all();
-        $this->articleService->addArticle($data);
-        return $this->show();
+        $this->articleService->addArticle($data['article']);
+        
+        $article = $this->articleService->getLatestArticle($data['article']['card_id']);
+        return response()->json(['article' => $article],
+            200, $this->header);
     }
 
     /**
@@ -58,12 +73,13 @@ class ArticleController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function show()
+    public function show($id)
     {
-        $article = $this->articleService->getLatestArticle();
+        $article = $this->articleService->getArticleDesc($id);
         return response()->json(['article' => $article],
-            200);
+            200, $this->header);
     }
+
 
     /**
      * Show the form for editing the specified resource.
@@ -75,7 +91,7 @@ class ArticleController extends Controller
     {
         $article = $this->articleService->editArticle($id);
         return response()->json(['article' => $article],
-            200);
+            200, $this->header);
     }
 
     /**
@@ -88,8 +104,8 @@ class ArticleController extends Controller
     public function update(Request $request, $id)
     {
         $data = $request->all();
-        $this->articleService->updateArticle($id, $data);
-        return $this->show();
+        $this->articleService->updateArticle($id, $data['article']);
+        return response()->json(['status' => 'OK'], 200, $this->header);
     }
 
     /**
@@ -101,7 +117,7 @@ class ArticleController extends Controller
     public function destroy($id)
     {
         $this->articleService->delArticle($id);
-        return $this->show();
+        return response()->json(['status' => 'OK'], 200, $this->header);
     }
 
 }

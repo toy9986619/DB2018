@@ -1,5 +1,11 @@
 @extends('layouts.default')
 
 @section('content')
-    <card_info :card-id="{{Request::segment(2)}}"></card_info>
+    {{-- <p>{{ Auth::user()->name }}</p> --}}
+    @if (Auth::guest())
+    <card_info :card-id="{{Request::segment(2)}}" user-name="Guest"></card_info>
+    @else
+    <card_info :card-id="{{Request::segment(2)}}" user-name="{{ Auth::user()->name}}"></card_info>
+    @endif
+    
 @endsection
