@@ -82,52 +82,65 @@
     
     <div class="article-body">
         <button id="show-article-modal" @click="showArticleInsert()" v-if="userName != 'Guest'">新增文章</button>
-        <table class="article-main">
-            <tr  v-for="(article, article_index) in article" :key="article.id"><td>
-            <tr>Article:</tr>
-            <tr class="article-header">
-                <td class="user-name">{{article.user.name}}</td>
-                <td class="article-title">{{article.title}}</td>
-            </tr>
-            <tr class="article-content">
-                <td>{{article.content}}</td>
-            </tr>
-            <tr>
-                <td v-if="userName == article.user.name">
-                    <button id="edit-article-model" @click="showArticleEdit(article.id, article_index)">編輯文章</button>
-                    <button id="del-article-model" @click="delArticle(article.id, article_index)">刪除</button>
+        <table class="article-table" v-for="(article, article_index) in article" :key="article.id" width="70%">
+            <tr class="article-main">
+                <td>
+                    <!-- <tr>
+                        <td colspan="">Article:</td>
+                    </tr> -->
+                    <tr class="article-user">
+                        <td>發文者:&nbsp;{{article.user.name}}</td>
+                    </tr>
+                    <tr class="article-title">
+                        <td class="title">標題:&nbsp;{{article.title}}</td>
+                    </tr>
+                    <tr class="article-content">
+                        <td><p class="pre-text">{{article.content}}</p></td>
+                    </tr>
+                    <tr>
+                        <td v-if="userName == article.user.name">
+                            <button id="edit-article-model" @click="showArticleEdit(article.id, article_index)">編輯文章</button>
+                            <button id="del-article-model" @click="delArticle(article.id, article_index)">刪除</button>
+                        </td>
+                    </tr>
                 </td>
             </tr>
-            
-            <tr class="reply-main">
-                <table class="reply-main">
-                    <tr  v-for="(reply) in article.reply" v-bind="article.reply" :key="reply.id"><td>
-                        <tr>Reply:</tr>
-                        <tr class="reply-header">
-                            <td class="user-name">{{reply.user.name}}</td>
-                        </tr>
-                        <tr class="reply-content">
-                            <td>=>{{reply.content}}</td>
-                        </tr>
-                        <!-- <tr>
-                            <td>
-                                <button id="edit-reply-model" @click="showReplyEdit(reply.id, article_index)" v-if="userName == reply.user.name">編輯文章</button>
-                                <button id="del-reply-model" @click="delReply(reply.id, article_index)" v-if="userName == article.user.name">刪除</button>
-                            </td>
-                        </tr> -->
-                    </td></tr>
-                    <tr class="reply-footer" v-if="userName != 'Guest'"><td><form onsubmit="return false;">
-                        <td>
-                            <input @blur="setNewReply(userName, article.id, new_reply_list[article_index])" v-model="new_reply_list[article_index]"/>
-                        </td>
-                        <td><button @click="ReplyInsert(article_index)">回應</button></td>
-                    </form></td></tr>
-                    <tr class="reply-footer" v-if="userName == 'Guest'">
-                        <td><input value="尚未登入，無法回應" disabled /></td>
+            <tr  v-for="(reply, reply_index) in article.reply" v-bind="article.reply" :key="reply.id" class="reply-main">
+                <td>
+                    <!-- <tr>
+                        <td>Reply:</td>
+                    </tr> -->
+                    <tr class="reply-header">
+                        <td class="user-name">{{reply.user.name}}</td>
                     </tr>
-                </table>
+                    <tr class="reply-content">
+                        <td>
+                            <p  class="pre-text">&emsp;{{reply.content}}</p>
+                            <button id="del-reply-model" @click="delReply(reply.id, article_index, reply_index)" 
+                                v-if="userName == article.user.name">刪除</button>
+                        </td>
+                    </tr>
+                    <!-- <tr>
+                        <td>
+                            <button id="edit-reply-model" @click="showReplyEdit(reply.id, article_index)" v-if="userName == reply.user.name">編輯文章</button>
+                            <button id="del-reply-model" @click="delReply(reply.id, article_index)" v-if="userName == article.user.name">刪除</button>
+                        </td>
+                    </tr> -->
+                </td>
             </tr>
-            </td></tr>
+            <tr class="reply-footer" v-if="userName != 'Guest'">
+                <td>
+                    <form onsubmit="return false;">
+                        <textarea @blur="setNewReply(userName, article.id, new_reply_list[article_index])" v-model="new_reply_list[article_index]" 
+                            ></textarea>
+                            <!-- oninput="this.style.height = this.scrollHeight+'px'" -->
+                        <button @click="ReplyInsert(article_index)">回應</button>
+                    </form>
+                </td>
+            </tr>
+            <tr class="reply-footer" v-if="userName == 'Guest'">
+                <td><input value="尚未登入，無法回應" disabled /></td>
+            </tr>
         </table>
     </div>
 
@@ -136,24 +149,19 @@
         <div slot="header">
             <h3 v-if="articleModalState == 'insert'">新增文章</h3>
             <h3 v-if="articleModalState == 'edit'">編輯文章</h3>
-            <h3 v-if="articleModalState == 'reply'">回應文章</h3>
         </div>
 
         <div slot="body">
             <form>
                 <div class="row">{{userName}}</div>
-                <div v-if="articleModalState != 'reply'">
                 <div class="row"><label>標題</label><input v-model="new_article.title" /></div>
                 <div class="row"><label>內容</label><textarea v-model="new_article.content"></textarea></div>
-                </div>
-                <div class="row" v-else><label>內容</label><textarea v-model="new_reply.content"></textarea></div>
             </form>
         </div>
 
         <div slot="footer">
             <button class="modal-default-button" v-if="articleModalState == 'insert'" @click="ArticleInsert()">新增</button>
             <button class="modal-default-button" v-if="articleModalState == 'edit'" @click="ArticleUpdate()">更新</button>
-            <button class="modal-default-button" v-if="articleModalState == 'reply'" @click="ReplyInsert()">回應</button>
             <button class="modal-default-button" @click="showArticleModal = false">取消</button>
         </div>
     </modal>
@@ -162,10 +170,39 @@
 </template>
 
 <style>
-    table,tr,td{
-        /* border: 1px black solid; */
-        /* padding: 10px; */
+    .pre-text{
+        white-space: pre-line;
+        word-wrap: break-word;
     }
+
+    .article-main td{
+        /* background-color: chartreuse; */
+        /* up right down left */
+        padding: 4px 4px 4px 6px;
+    }
+
+    .reply-main,.reply-footer{
+        border-bottom: 1px black solid;
+        /* background-color: aqua; */
+    }
+
+    .reply-footer textarea{
+        width: 90%;
+        resize: none;
+    }
+
+    .reply-main td,.reply-footer td{
+        padding : 4px 4px 4px 6px;
+    }
+    
+    .article-main{
+        border: 1px black solid;
+    }
+
+    .article-table{
+        border: 1px black solid;
+    }
+
     .article-model {
         display: inline-block;
         width: auto;
@@ -287,7 +324,8 @@ export default {
         
         delArticle: function(article_id, index){
             let self = this;
-
+            
+            //delete slef article
             this.axios({
                 method: 'delete',
                 url: '/article/del/'+article_id,
@@ -297,6 +335,7 @@ export default {
             }).catch(function(response){
                 console.log(response);
             });
+            //delete all reply in self article
             this.axios({
                 method: 'delete',
                 url: '/reply/delAll/'+article_id,
@@ -346,13 +385,21 @@ export default {
             }
         },
 
-        // showReplyInsert: function(article_id, index){
-        //     this.setNewReply(this.userName, article_id);
-        //     this.articleIndex = index
+        delReply: function(reply_id, article_index, reply_index){
+            let self = this;
+            
+            //delete slef reply
+            this.axios({
+                method: 'delete',
+                url: '/reply/del/'+reply_id,
+            }).then(function(response){
+                self.article[article_index].reply.splice(reply_index, 1);
+                console.log("完成");
+            }).catch(function(response){
+                console.log(response);
+            });
+        },
 
-        //     this.articleModalState = "reply";
-        //     this.showArticleModal = true;
-        // },
     },
 
 
