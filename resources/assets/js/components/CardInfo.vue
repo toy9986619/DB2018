@@ -101,13 +101,13 @@
             
             <tr class="reply-main">
                 <table class="reply-main">
-                    <tr  v-for="reply in article.reply" v-bind="article.reply" :key="reply.id"><td>
+                    <tr  v-for="(reply) in article.reply" v-bind="article.reply" :key="reply.id"><td>
                         <tr>Reply:</tr>
                         <tr class="reply-header">
                             <td class="user-name">{{reply.user.name}}</td>
                         </tr>
                         <tr class="reply-content">
-                            <td>{{reply.content}}</td>
+                            <td>=>{{reply.content}}</td>
                         </tr>
                         <!-- <tr>
                             <td>
@@ -116,10 +116,12 @@
                             </td>
                         </tr> -->
                     </td></tr>
-                    <tr class="reply-footer" v-if="userName != 'Guest'">
-                        <!-- <td><input  /></td> -->
-                        <td><button @click="showReplyInsert(article.id, article_index)">回應</button></td>
-                    </tr>
+                    <tr class="reply-footer" v-if="userName != 'Guest'"><td><form onsubmit="return false;">
+                        <td>
+                            <input @blur="setNewReply(userName, article.id, new_reply_list[article_index])" v-model="new_reply_list[article_index]"/>
+                        </td>
+                        <td><button @click="ReplyInsert(article_index)">回應</button></td>
+                    </form></td></tr>
                     <tr class="reply-footer" v-if="userName == 'Guest'">
                         <td><input value="尚未登入，無法回應" disabled /></td>
                     </tr>
@@ -160,9 +162,10 @@
 </template>
 
 <style>
-    /* table,tr,td{
-        border: 1px black solid;
-    } */
+    table,tr,td{
+        /* border: 1px black solid; */
+        /* padding: 10px; */
+    }
     .article-model {
         display: inline-block;
         width: auto;
@@ -188,6 +191,7 @@ export default {
             reply: [],
             articleModalState: "",
             showArticleModal: false,
+            new_reply_list: [],
 
             isReady: false
         }
@@ -313,8 +317,9 @@ export default {
             }
         },
 
-        ReplyInsert: function(){
+        ReplyInsert: function(index){
             let self = this;
+            self.articleIndex = index
 
             this.axios.post('/reply', {
                 reply: self.new_reply
@@ -322,6 +327,7 @@ export default {
             .then(function(response){
                 self.showArticleModal = false;
                 self.article[self.articleIndex].reply.push(response.data.reply);
+                self.new_reply_list[self.articleIndex] = null;
                 // console.log(self.new_reply, self.article[self.articleIndex].reply);
                 console.log("完成");
             })
@@ -332,21 +338,21 @@ export default {
 
         },
 
-        setNewReply: function(user_name, article_id){
+        setNewReply: function(user_name, article_id, content){
             this.new_reply = {
                 user_name: user_name,
-                content: "",
+                content: content,
                 article_id: article_id
             }
         },
 
-        showReplyInsert: function(article_id, index){
-            this.setNewReply(this.userName, article_id);
-            this.articleIndex = index
+        // showReplyInsert: function(article_id, index){
+        //     this.setNewReply(this.userName, article_id);
+        //     this.articleIndex = index
 
-            this.articleModalState = "reply";
-            this.showArticleModal = true;
-        },
+        //     this.articleModalState = "reply";
+        //     this.showArticleModal = true;
+        // },
     },
 
 
