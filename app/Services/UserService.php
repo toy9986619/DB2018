@@ -13,10 +13,21 @@ class UserService
         $this->userRepo = $userRepo;
     }
 
+    /**
+     * 取得 所有使用者
+     *
+     * @return void
+     */
     public function getAllUser(){
         return $this->userRepo->getAllUser();
     }
 
+    /**
+     * 依據name 取得 使用者的ID
+     *
+     * @param string $name
+     * @return int
+     */
     public function getIdByName($name){
         $user_id = $this->userRepo->getIdByName($name)->toArray();
 

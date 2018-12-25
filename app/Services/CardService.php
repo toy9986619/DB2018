@@ -69,6 +69,12 @@ class CardService
         $this->cardRepo->insertCard($card_data);
     }
 
+    /**
+     * 依據輸入資料 更新卡片
+     *
+     * @param array $input_data
+     * @return void
+     */
     public function updateCard($input_data){
         $card_data = $input_data['card'];
 
@@ -79,6 +85,12 @@ class CardService
         $this->cardRepo->updateCard($id, $update_data);
     }
 
+    /**
+     * 依據id 刪除卡片
+     *
+     * @param int $id
+     * @return void
+     */
     public function deleteCard($id){
         $this->cardRepo->deleteCard($id);
     }

@@ -66,14 +66,33 @@ class CardRepository
         return $this->card->all()->count();
     }
 
+    /**
+     * 新增 卡片
+     *
+     * @param array $card_data
+     * @return void
+     */
     public function insertCard($card_data){
         $card = $this->card->create($card_data);
     }
 
+    /**
+     * 更新 卡片
+     *
+     * @param int $id
+     * @param array $card_data
+     * @return void
+     */
     public function updateCard($id, $card_data){
         $card = $this->card->find($id)->update($card_data);
     }
 
+    /**
+     * 刪除 卡片
+     *
+     * @param int $id
+     * @return void
+     */
     public function deleteCard($id){
         $this->card->destroy($id);
     }
