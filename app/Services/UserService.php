@@ -13,6 +13,9 @@ class UserService
         $this->userRepo = $userRepo;
     }
 
+    public function getAllUser(){
+        return $this->userRepo->getAllUser();
+    }
 
     public function getIdByName($name){
         $user_id = $this->userRepo->getIdByName($name)->toArray();

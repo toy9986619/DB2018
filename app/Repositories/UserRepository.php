@@ -16,6 +16,10 @@ class UserRepository
         $this->user = $user;
     }
 
+    public function getAllUser(){
+        return $this->user->all();
+    }
+
     /**
      * 依靠user_name取得user_id
      * 
