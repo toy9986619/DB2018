@@ -2,20 +2,20 @@
 <div class="content">
     <div class="cms-sidemenu">
         <ul>
-            <li><span class="menu" v-on:click="management = 'account'">會員管理</span></li>
+            <li><span class="menu" v-on:click="management = 'user'">會員管理</span></li>
             <li><span class="menu" v-on:click="management = 'card'">卡片管理</span></li>
         </ul>
     </div>
 
     <cms_card v-if="management == 'card'"></cms_card>
-    <cms_account v-if="management == 'account'"></cms_account>
+    <cms_user v-if="management == 'user'"></cms_user>
     
 </div>
 </template>
 
 <script>
 import cms_card from "./CMS_Card.vue";
-import cms_account from "./CMS_Account.vue"
+import cms_user from "./CMS_User.vue"
 
 export default {
     data: function(){
@@ -34,7 +34,7 @@ export default {
 
     components: {
         cms_card,
-        cms_account
+        cms_user
     }
 }
 </script>
