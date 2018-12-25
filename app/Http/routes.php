@@ -21,6 +21,10 @@ Route::resource('card', 'CardController', ['only' => [
     'index', 'show', 'edit', 'update', 'store'
 ]]);
 
+Route::resource('user', 'UserController', ['only' => [
+    'index'
+]]);
+
 Route::get('/cms', 'CMSController@index');
 
 Route::resource('activeskill', 'ActiveSkillController', ['only' => [
