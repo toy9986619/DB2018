@@ -13,7 +13,7 @@
                 <td>{{ card.name }}</td>
                 <td>
                     <button id="show-card-edit-modal" @click="showCardEdit(card.id, index)">編輯</button>
-                    <button>刪除</button>
+                    <button id="show-card-del-modal" @click="showCardDelete(card.id, index)">刪除</button>
                 </td>
             </tr>
         </tbody>
@@ -79,6 +79,22 @@
     </modal>
 
     <!-- 刪除卡片資料表單 -->    
+    <modal v-if="showDeleteCardModal" @close="showDeleteCardModal = false">
+        <div slot="header">
+            <h3>刪除卡片</h3>
+        </div>
+
+        <div slot="body">
+            確定刪除 No.{{targetId}} 卡片？
+            {{cardIndex}}
+        </div>
+
+        <div slot="footer">
+            <button class="modal-default-button" @click="deleteCard(targetId, cardIndex)">刪除</button>
+            <button class="modal-default-button" @click="showDeleteCardModal = false">取消</button>
+        </div>
+    </modal>
+
 </div>
 </template>
 
@@ -90,6 +106,7 @@ export default {
         return {
             isReady: false,
             showCardModal: false,
+            showDeleteCardModal: false,
             cardModalState: "",
             active_skill_list: [],
             leader_skill_list: [],
@@ -130,6 +147,12 @@ export default {
                 .catch(function(response){
                     console.log(response);
                 });
+        },
+
+        showCardDelete: function(id, index){
+            this.targetId = id;
+            this.cardIndex = index;
+            this.showDeleteCardModal = true;
         },
 
         getCardList: function(page){
@@ -202,6 +225,7 @@ export default {
                 .then(function(response){
                     self.showCardModal = false;
                     //self.card_list.push(self.card);
+                    self.getCardList(self.page_data.current_page);
                 })
                 .catch(function(response){
                     console.log(response);
@@ -219,10 +243,24 @@ export default {
                 },
             }).then(function(response){
                 self.showCardModal = false;
-                self.card_list[self.cardIndex] = self.card;
+                self.page_data.data[self.cardIndex] = self.card;
                 console.log("完成");
             }).catch(function(response){
                 console.log(response);
+            });
+        },
+
+        deleteCard: function(id, index){
+            let self = this;
+
+            this.axios({
+                method: 'delete', 
+                url: '/card/' + id
+            }).then((response) => {
+                self.showDeleteCardModal = false;
+                self.getCardList(self.page_data.current_page);
+            }).catch((response) => {
+                console.log(response)
             });
         },
 

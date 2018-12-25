@@ -115,6 +115,8 @@ class CardController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $this->cardService->deleteCard($id);
+
+        return response()->json(['status' => 'OK'], 200, $this->header);
     }
 }

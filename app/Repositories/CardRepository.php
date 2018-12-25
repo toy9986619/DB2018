@@ -73,4 +73,8 @@ class CardRepository
     public function updateCard($id, $card_data){
         $card = $this->card->find($id)->update($card_data);
     }
+
+    public function deleteCard($id){
+        $this->card->destroy($id);
+    }
 }

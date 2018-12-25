@@ -78,4 +78,8 @@ class CardService
 
         $this->cardRepo->updateCard($id, $update_data);
     }
+
+    public function deleteCard($id){
+        $this->cardRepo->deleteCard($id);
+    }
 }

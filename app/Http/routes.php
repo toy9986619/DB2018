@@ -18,7 +18,7 @@ Route::get('/', function () {
 Route::get('/gallery', 'CardController@gallery');
 Route::get('/gallery/{id}', 'CardController@cardInfo');
 Route::resource('card', 'CardController', ['only' => [
-    'index', 'show', 'edit', 'update', 'store'
+    'index', 'show', 'edit', 'update', 'store', 'destroy'
 ]]);
 
 Route::resource('user', 'UserController', ['only' => [
