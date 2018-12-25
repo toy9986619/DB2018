@@ -44,7 +44,7 @@ class CardService
      * @return App\Models\Card
      */
     public function getCardsList($filter_data){
-        $attribute = $filter_data['attribute'];
+        $attribute = empty($filter_data['attribute']) ? "" : $filter_data['attribute'];
 
         $cards = $this->cardRepo->getCardsList($attribute);
 
