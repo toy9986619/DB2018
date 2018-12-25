@@ -7655,6 +7655,19 @@ button.close {
   margin: auto;
 }
 
+.data-table {
+  border: 1px black solid;
+}
+
+.page-nonactive {
+  cursor: pointer;
+  color: blue;
+}
+
+.page > span::after {
+  content: " ";
+}
+
 /*# sourceMappingURL=app.css.map */
 
 /*# sourceMappingURL=all.css.map */

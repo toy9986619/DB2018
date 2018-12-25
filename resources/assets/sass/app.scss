@@ -8,3 +8,18 @@
     height: auto;
     margin: auto;
 }
+
+.data-table {
+    border: 1px black solid;
+}
+
+.page-nonactive {
+    cursor: pointer;
+    color: blue;
+}
+
+
+
+.page > span::after{
+    content: " ";
+}

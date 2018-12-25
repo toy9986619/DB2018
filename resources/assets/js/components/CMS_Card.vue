@@ -269,19 +269,4 @@ export default {
         position: relative;
         left: 300px;
     }
-
-    .data-table {
-        border: 1px black solid;
-    }
-    
-    .page-nonactive {
-        cursor: pointer;
-        color: blue;
-    }
-
-
-
-    .page > span::after{
-        content: " ";
-    }
 </style>
