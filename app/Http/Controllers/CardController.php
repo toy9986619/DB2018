@@ -40,11 +40,8 @@ class CardController extends Controller
         $filter_data = $request->all();
 
         $cards = $this->cardService->getCardsList($filter_data);
-        $count = count($cards);
         return response()->json(
-                ['count' => $count,
-                'cards' => $cards
-                ], 200, $this->header, JSON_UNESCAPED_UNICODE);
+                ['cards' => $cards], 200, $this->header, JSON_UNESCAPED_UNICODE);
     }
 
     /**

@@ -59,7 +59,7 @@ class CardRepository
             $query = $query->where('attribute', '=', $attribute);
         }
         
-        return $query->take(100)->get();
+        return $query->paginate(100);
     }
 
     public function getCardDataCount(){

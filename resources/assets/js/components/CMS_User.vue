@@ -1,7 +1,7 @@
 <template>
 <div class="cms-container">
     <button id="show-user-create-modal" @click="showUserInsert()">新增</button>
-    <table style="border:5px;" border="3" cellpadding="5">
+    <table class="data-table" border="3" cellpadding="5">
         <tbody>
             <tr>
                 <td>使用者編號</td>
@@ -70,5 +70,7 @@ export default {
 </script>
 
 <style>
-
+    .data-table {
+        border: 1px black solid;
+    }
 </style>

@@ -1,14 +1,14 @@
 <template>
 <div class="cms-container">
     <button id="show-card-create-modal" @click="showCardInsert()">新增</button>
-    <table style="border:5px;" border="3" cellpadding="5">
+    <table class="data-table" border="3" cellpadding="5">
         <tbody>
             <tr>
                 <td>卡片編號</td>
                 <td>卡片名稱</td>
                 <td>操作</td>
             </tr>
-            <tr v-for="(card, index) in card_list" :key="card.id">
+            <tr v-if="isReady" v-for="(card, index) in page_data.data" :key="card.id">
                 <td>{{ card.id }}</td>
                 <td>{{ card.name }}</td>
                 <td>
@@ -18,6 +18,12 @@
             </tr>
         </tbody>
     </table>
+
+    <div class="page">
+        <span v-for="i in page_data.last_page" :key="i" 
+            @click="getCardList(i)"
+            :class="{'page-nonactive': page_data.current_page != i}">{{ i }}</span>
+    </div>
 
         <!-- 編輯卡片資料表單 -->
     <modal v-if="showCardModal" @close="showCardModal = false">
@@ -85,11 +91,11 @@ export default {
             isReady: false,
             showCardModal: false,
             cardModalState: "",
-            card_list: [],
             active_skill_list: [],
             leader_skill_list: [],
             series_list: [],
-            race_list: []
+            race_list: [],
+            page_data: []
         }
     },
 
@@ -99,7 +105,7 @@ export default {
             this.getLeaderSkillList();
             this.getSeriesList();
             this.getRaceList();
-            this.getCardList();
+            this.getCardList(0);
         },
 
         showCardInsert: function(){
@@ -126,15 +132,16 @@ export default {
                 });
         },
 
-        getCardList: function(){
+        getCardList: function(page){
             let self = this;
             this.axios.get('/card', {
                     params:{
-                        'attribute':""
+                        'attribute':"",
+                        'page':page
                     }
                 })
                 .then(function(response){
-                    self.card_list = response.data.cards;
+                    self.page_data = response.data.cards;
                     self.isReady = true;
                 })
                 .catch(function(response){
@@ -261,5 +268,20 @@ export default {
         height: auto;
         position: relative;
         left: 300px;
+    }
+
+    .data-table {
+        border: 1px black solid;
+    }
+    
+    .page-nonactive {
+        cursor: pointer;
+        color: blue;
+    }
+
+
+
+    .page > span::after{
+        content: " ";
     }
 </style>
