@@ -105,7 +105,7 @@
                     </tr>
                 </td>
             </tr>
-            <tr  v-for="(reply, reply_index) in article.reply" v-bind="article.reply" :key="reply.id" class="reply-main">
+            <tr  v-for="(reply, reply_index) in article.reply" :key="reply.id" class="reply-main">
                 <td>
                     <!-- <tr>
                         <td>Reply:</td>
