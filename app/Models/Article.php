@@ -15,7 +15,7 @@ class Article extends BaseModel
     ];
 
     protected $hidden = [
-        'card_id', 'user_id'
+        // 'card_id', 'user_id'
     ];
 
     /**

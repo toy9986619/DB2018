@@ -22,7 +22,7 @@ class ArticleRepository
      * @return App\Models\Article
      */
     public function getArticle(){
-        return $this->article->all();
+        return $this->article->with('user', 'reply.user')->get();
     }
 
     /**
@@ -30,12 +30,27 @@ class ArticleRepository
      * 
      * @return App\Models\Article的最新5筆資料
      */
-    public function getLatestArticle(){
+    public function getArticleDesc($card_id){
         return $this->article
                 ->with('user', 'reply.user')
+                ->where('card_id', '=', $card_id)
                 ->orderby('id', 'desc')
                 // ->limit(5)    
                 ->get(); 
+    }
+
+    /**
+     * 回傳最新的1個討論
+     * 
+     * @return App\Models\Article的最新1筆資料
+     */
+    public function getLatestArticle($card_id){
+        return $this->article
+                ->with('user', 'reply.user')
+                ->where('card_id', '=', $card_id)
+                ->orderby('id', 'desc')
+                // ->first(); 
+                ->get();
     }
 
     /**

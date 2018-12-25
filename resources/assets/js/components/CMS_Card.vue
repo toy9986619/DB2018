@@ -1,6 +1,6 @@
 <template>
 <div class="cms-container">
-    <button id="show-card-create-modal" @click="showCardInsert()">新增</button>
+    <button id="show-card-modal" @click="showCardInsert()">新增</button>
     <table>
         <tbody>
             <tr>

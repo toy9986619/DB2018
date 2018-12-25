@@ -15,7 +15,7 @@ class Reply extends BaseModel
     ];
 
     protected $hidden = [
-        'create_at', 'article_id', 'user_id'
+        'create_at'
     ];
 
     /**
