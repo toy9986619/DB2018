@@ -31,5 +31,9 @@ class UserRepository
                 
         return $userinfo;
     }
+
+    public function getUserById($id){
+        return $this->user->find($id);
+    }
    
 }

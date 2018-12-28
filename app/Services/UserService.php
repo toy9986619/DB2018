@@ -34,4 +34,7 @@ class UserService
         return $user_id['id'];
     }
 
+    public function getUserById($id){
+        return $this->userRepo->getUserById($id);
+    }
 }

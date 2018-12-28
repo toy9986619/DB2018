@@ -73,7 +73,8 @@ class UserController extends Controller
      */
     public function edit($id)
     {
-        //
+        return response()->json(['user' => $this->userService->getUserById($id)],
+            200, $this->header, JSON_UNESCAPED_UNICODE);
     }
 
     /**
