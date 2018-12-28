@@ -112,7 +112,8 @@ export default {
             leader_skill_list: [],
             series_list: [],
             race_list: [],
-            page_data: []
+            page_data: [],
+            card: ""
         }
     },
 
