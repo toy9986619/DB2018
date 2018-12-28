@@ -35,5 +35,16 @@ class UserRepository
     public function getUserById($id){
         return $this->user->find($id);
     }
-   
+
+    public function insertUser($user_data){
+        $this->user->create($user_data);
+    }
+
+    public function updateUser($id, $user){
+        $this->user->find($id)->update($user);
+    }
+
+    public function deleteUser($id){
+        $this->user->destroy($id);
+    }
 }

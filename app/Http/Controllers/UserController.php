@@ -48,7 +48,10 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $input_data = $request->all();
+        $this->userService->insertUser($input_data);
+
+        return response()->json(['status'=> 'ok'], 200, $this->header);
     }
 
     /**
@@ -86,7 +89,10 @@ class UserController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $input_data = $request->all();
+        $this->userService->updateUser($id, $input_data);
+
+        return response()->json(['status' => 'ok'], 200, $this->header);
     }
 
     /**
@@ -97,6 +103,8 @@ class UserController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $this->userService->deleteUser($id);
+
+        return response()->json(['status' => 'ok'], 200, $this->header);
     }
 }

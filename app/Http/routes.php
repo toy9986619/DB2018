@@ -29,7 +29,7 @@ Route::resource('card', 'CardController', ['only' => [
     'index', 'show', 'edit', 'update', 'store', 'destroy'
 ]]);
 Route::resource('user', 'UserController', ['only' => [
-    'index', 'edit'
+    'index', 'edit', 'update', 'store', 'destroy'
 ]]);
 Route::resource('activeskill', 'ActiveSkillController', ['only' => [
     'index'

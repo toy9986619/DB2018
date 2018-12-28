@@ -2,6 +2,7 @@
 
 namespace App\Services;
 
+use Hash;
 use App\Repositories\UserRepository;
 
 class UserService
@@ -36,5 +37,20 @@ class UserService
 
     public function getUserById($id){
         return $this->userRepo->getUserById($id);
+    }
+
+    public function insertUser($input_data){
+        $user_data = $input_data['user'];
+        $user_data['password'] = Hash::make($user_data['password']);
+        $this->userRepo->insertUser($user_data);
+    }
+
+    public function updateUser($id, $input_data){
+        $user = $input_data['user'];
+        $this->userRepo->updateUser($id, $user);
+    }
+
+    public function deleteUser($id){
+        $this->userRepo->deleteUser($id);
     }
 }
