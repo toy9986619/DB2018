@@ -20,6 +20,30 @@
             </tr>
         </tbody>
     </table>
+
+    <!-- 編輯使用者資料表單 -->
+    <modal v-if="showUserModal" @close="showUserModal = false">
+        <div slot="header">
+            <h3 v-if="userModalState == 'insert'">新增使用者</h3>
+            <h3 v-if="userModalState == 'edit'">編輯使用者</h3>
+        </div>
+
+        <div slot="body">
+            <div class="row"><label>使用者名稱</label><input v-model="user.name"/></div>
+            <div class="row"><label>使用者帳號</label><input v-model="user.email"/></div>
+            <div class="row"><label>使用者類型</label><select v-model="user.type">
+                <option v-for="type in userTypeList" :value="type" :key="type.id">
+                    {{ type }}
+                </option>
+            </select></div>
+        </div>
+
+        <div slot="footer">
+            <button class="modal-default-button" v-if="userModalState == 'insert'" @click="insertCard()">新增</button>
+            <button class="modal-default-button" v-if="userModalState == 'edit'" @click="updateCard()">更新</button>
+            <button class="modal-default-button" @click="showUserModal = false">取消</button>
+        </div>
+    </modal>
 </div>
 </template>
 
@@ -29,7 +53,10 @@ import modal from './Modal.vue'
 export default {
     data: function(){
         return {
-            user_list: []
+            user_list: [],
+            showUserModal: false,
+            userModalState: "",
+            userTypeList: ["normal", "admin"]
         }
     },
 
@@ -51,11 +78,37 @@ export default {
         },
 
         showUserInsert: function(){
-
+            this.userModalState = "insert";
+            this.showUserModal = true;
         },
 
-        showUserEdit: function(){
+        showUserEdit: function(id, index){
+            this.userModalState = "edit";
 
+            let self = this;
+            this.axios.get('/user/' + id + "/edit")
+                .then((response) => {
+                    self.user = response.data.user;
+                    self.showUserModal = true;
+                })
+                .catch((response) => {
+                    console.log(response);
+                });
+        },
+
+    },
+
+    watch: {
+        userModalState: function(value){
+            if(value == "insert"){
+                this.user = {
+                    id: "",
+                    type: "normal",
+                    name: "",
+                    email: "",
+                    password: ""
+                }
+            }
         }
     },
 
