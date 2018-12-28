@@ -127,8 +127,6 @@ export default {
         },
 
         showCardInsert: function(){
-            this.setNewCard();
-
             this.cardModalState = "insert";
             this.showCardModal = true;
         },
@@ -263,35 +261,39 @@ export default {
             }).catch((response) => {
                 console.log(response)
             });
-        },
-
-        setNewCard: function(){
-            this.card = {
-                id: "",
-                name: "",
-                attribute: "",
-                race_id: "",
-                series_id: "",
-                rarity: "",
-                cost: "",
-                exp_curve: "",
-                max_exp: "",
-                min_level: "",
-                min_hp: "",
-                min_atk: "",
-                min_rec: "",
-                max_level: "",
-                max_hp: "",
-                max_atk: "",
-                max_rec: "",
-                active_skill_id: "",
-                leader_skill_id: ""
-            }
         }
     },
 
     mounted: function(){
         this.init();
+    },
+    
+    watch: {
+        cardModalState: function(value){
+            if(value == 'insert'){
+                this.card = {
+                    id: this.page_data.total + 1,
+                    name: "",
+                    attribute: "",
+                    race_id: "",
+                    series_id: "",
+                    rarity: "",
+                    cost: "",
+                    exp_curve: "",
+                    max_exp: "",
+                    min_level: "",
+                    min_hp: "",
+                    min_atk: "",
+                    min_rec: "",
+                    max_level: "",
+                    max_hp: "",
+                    max_atk: "",
+                    max_rec: "",
+                    active_skill_id: "",
+                    leader_skill_id: ""
+                }
+            }
+        }
     },
 
     components: {
