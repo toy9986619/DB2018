@@ -1,7 +1,7 @@
 <template>
 <div class="cms-container">
     <button id="show-card-create-modal" @click="showCardInsert()">新增</button>
-    <table class="data-table" border="3" cellpadding="5">
+    <table class="data-table" border="1" cellpadding="5">
         <tbody>
             <tr>
                 <td>卡片編號</td>

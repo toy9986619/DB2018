@@ -13,11 +13,11 @@
         </tbody>
     </table>
 
-    <table>
+    <table class="data-table outer-table" align="center" border="1">
         <tbody>
             <tr>
-                <td>
-                    <table>
+                <td rowspan="3">
+                    <table align="center">
                         <tbody>
                             <tr>
                                 <td><img :src="'/img/card/no' + card.id + '_icon.png'"></td>
@@ -34,15 +34,15 @@
                 <td>種族: {{card.race.name}}</td>
             </tr>
             <tr>
-                <td>經驗曲線: {{card.exp_curve}} COST: {{card.cost}}</td>
+                <td colspan="2">經驗曲線: {{card.exp_curve}} COST: {{card.cost}}</td>
             </tr>
             <tr>
-                <td>滿等所需經驗值: {{card.max_exp}}</td>
+                <td colspan="2">滿等所需經驗值: {{card.max_exp}}</td>
             </tr>
         </tbody>
     </table>
 
-    <table>
+    <table class="data-table outer-table" align="center" border="1">
         <tbody>
             <tr>
                 <td>初始 Lv: {{card.min_level}}</td>
@@ -55,7 +55,7 @@
         </tbody>
     </table>
 
-    <table>
+    <table class="data-table outer-table" align="center" border="1">
         <tbody>
             <tr>
                 <td>主動技能: {{card.active_skill.name}}</td>
@@ -63,12 +63,12 @@
                 <td>最小冷卻: {{card.active_skill.min_cd}}</td>
             </tr>
             <tr>
-                <td>{{card.active_skill.description}}</td>
+                <td colspan="3">{{card.active_skill.description}}</td>
             </tr>
         </tbody>
     </table>
 
-    <table>
+    <table class="data-table outer-table" align="center" border="1">
         <tbody>
             <tr>
                 <td>隊長技能: {{card.leader_skill.name}}</td>
@@ -82,7 +82,7 @@
     
     <div class="article-body">
         <button id="show-article-modal" @click="showArticleInsert()" v-if="userName != 'Guest'">新增文章</button>
-        <table class="article-table" v-for="(article, article_index) in article" :key="article.id" width="70%">
+        <table class="article-table outer-table" v-for="(article, article_index) in article" :key="article.id" width="70%" align="center">
             <tr class="article-main">
                 <td>
                     <!-- <tr>
@@ -209,6 +209,14 @@
         height: auto;
         position: relative;
         left: 300px;
+    }
+
+    .outer-table {
+        width: 800px;
+    }
+
+    .data-table {
+        border-style: solid;
     }
 
 </style>
