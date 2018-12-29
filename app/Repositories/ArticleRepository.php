@@ -34,7 +34,7 @@ class ArticleRepository
         return $this->article
                 ->with('user', 'reply.user')
                 ->where('card_id', '=', $card_id)
-                ->orderby('id', 'desc')
+                // ->orderby('id', 'desc')
                 // ->limit(5)    
                 ->get(); 
     }

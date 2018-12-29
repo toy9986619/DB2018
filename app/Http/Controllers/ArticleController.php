@@ -76,7 +76,8 @@ class ArticleController extends Controller
     public function show($id)
     {
         $article = $this->articleService->getArticleDesc($id);
-        return response()->json(['article' => $article],
+        $article_number = count($article);
+        return response()->json(['article' => $article, 'article_number' =>$article_number],
             200, $this->header);
     }
 

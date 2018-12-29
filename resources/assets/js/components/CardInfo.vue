@@ -84,7 +84,7 @@
     </table>
     </div>
     
-    <ArticleReply :card-id="this.cardId" :user-name="this.userName"></ArticleReply>
+    <ArticleReply :card-id="this.cardId" :user-name="this.userName" align="center"></ArticleReply>
 
 </div>
 </template>
