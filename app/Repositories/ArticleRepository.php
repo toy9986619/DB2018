@@ -49,8 +49,8 @@ class ArticleRepository
                 ->with('user', 'reply.user')
                 ->where('card_id', '=', $card_id)
                 ->orderby('id', 'desc')
-                // ->first(); 
-                ->get();
+                ->first(); 
+                // ->get();
     }
 
     /**

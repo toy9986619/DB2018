@@ -1,7 +1,7 @@
 <template>
 <div>
     <div class="article-body" v-show="isReady" style="margin-top:20px; width:700px;">
-        <p style="text-align:left;">{{article_number}}則留言</p>
+        <p style="text-align:left; font-size:20px;">{{article_number}}則留言</p>
         <table class="article-table outer-table" v-for="(article, article_index) in article" :key="article.id" width="70%" align="center">
             <tr class="article-main">
                 <td style="padding-left:10px;">
@@ -22,15 +22,15 @@
                         <br><br>
                         <p class="pre-text">{{article.content}}</p>
                         
-                        <p @mousedown="showReplyInsertModel(article_index)" style="color:blue;">回覆</p>
-                        <p v-if="showReplyTable" @mousedown="hideReply(article_index)" style="color:blue; margin-left:25px;">隱藏留言</p>
-                        <p v-if="!showReplyTable" @mousedown="showReply(article_index)" style="color:blue; margin-left:25px;">顯示留言</p>
+                        <p @mousedown="showReplyInsertModel(article_index)" style="color:blue; cursor:pointer;">回覆</p>
+                        <p v-if="showReplyTable[article_index]" @mousedown="hideReply(article_index)" class="pointer">隱藏留言</p>
+                        <p v-if="!showReplyTable[article_index]" @mousedown="showReply(article_index)" class="pointer">顯示留言</p>
                     </div>
                     <!-- change -->
                 </td>
             </tr>
-            <tr  v-for="(reply, reply_index) in article.reply" :key="reply.id" class="reply-main" v-if="showReplyTable">
-                <td style="padding-left:50px; padding-bottom:10px;">
+            <tr  v-for="(reply, reply_index) in article.reply" :key="reply.id" class="reply-main" v-if="showReplyTable[article_index]">
+                <td style="padding-left:60px; padding-bottom:10px;">
                     <!-- change -->
                     <!-- <tr>
                         <td>Reply:</td>
@@ -54,7 +54,7 @@
                     <!-- change -->
                 </td>
             </tr>
-            <tr class="reply-footer" v-if="showReplyInsert">
+            <tr class="reply-footer" v-if="showReplyInsert[article_index]">
                 <td>
                     <form onsubmit="return false;" style="margin-top:8px;margin-left:10px;">
                         <textarea @blur="setNewReply(userName, article.id, new_reply_list[article_index])" v-model="new_reply_list[article_index]" 
@@ -68,10 +68,12 @@
         <div  class="article-insert">
             <form onsubmit="return false;" style="margin-top:35px;margin-left:10px;">
                 <textarea  @blur="setNewArticle(userName, cardId, article_content)" v-model="article_content"></textarea>
-                <button @click="ArticleInsert()" v-if="userName != 'Guest'">發怖</button>
-                <button @click="Alert()" v-if="userName == 'Guest'">發怖</button>
+                <div align="right">
+                    <button @click="ArticleInsert()" v-if="userName != 'Guest'">發怖</button>
+                    <button @click="Alert()" v-if="userName == 'Guest'">發怖</button>
+                </div>
             </form>
-            <p align="left">發表留言的身分:&nbsp;{{userName}}</p>
+            <p align="left" style="font-weight:bold;">發表留言的身分:&nbsp;{{userName}}</p>
         </div>
 
     </div>
@@ -111,8 +113,8 @@ export default {
             showArticleModal: false,
             new_reply_list: [],
             article_content: "",
-            showReplyTable: false,
-            showReplyInsert: false,
+            showReplyTable: [],
+            showReplyInsert: [],
             article_number: 0,
 
 
@@ -130,10 +132,10 @@ export default {
                     self.article = response.data.article;
                     console.log(self.article);
                     self.article_number = response.data.article_number;
-                    // for(var i = 0; i < self.article_number; i++){
-                    //     self.showReplyInsert.push(false);
-                    //     self.showReplyTable.push(false);
-                    // }
+                    for(var i = 0; i < self.article_number; i++){
+                        self.showReplyInsert.push(false);
+                        self.showReplyTable.push(false);
+                    }
                     self.isReady = true;
                 })
                 .catch(function(response){
@@ -151,18 +153,15 @@ export default {
                 alert("尚未登入");
             }
             else
-                // this.showReplyInsert[index] = true;
-                this.showReplyInsert = true;
+                this.$set(this.showReplyInsert, index, true);
         },
 
         showReply: function(index){
-            // this.showReplyTable[index] = true;
-            this.showReplyTable = true;
+            this.$set(this.showReplyTable, index, true);
         },
 
         hideReply: function(index){
-            // this.showReplyTable[index] = false;
-            this.showReplyTable = false;
+            this.$set(this.showReplyTable, index, false);
         },
 
         showArticleEdit: function(article_id, index){
@@ -208,15 +207,18 @@ export default {
             })
             .then(function(response){
                 self.showArticleModal = false;
-                // console.log(response.data.article);
-                self.article = response.data.article;
+                console.log(response.data.article);
+                self.article.push(response.data.article);
                 self.article_content = null;
+                self.showReplyInsert.push(false);
+                self.showReplyTable.push(false);
                 // console.log(self.article);
                 console.log("完成");
                 
             })
             .catch(function(response){
                 // console.log(self.new_article);
+                // console.log(response.data.article);
                 console.log(response);
             });
         },
@@ -266,7 +268,7 @@ export default {
                 self.showArticleModal = false;
                 self.article[self.articleIndex].reply.push(response.data.reply);
                 self.new_reply_list[self.articleIndex] = null;
-                self.showReplyTable = true;
+                self.showReplyTable[self.articleIndex] = true;
                 // console.log(self.new_reply, self.article[self.articleIndex].reply);
                 console.log("完成");
             })
@@ -312,6 +314,11 @@ export default {
 </script>
 
 <style>
+    .pointer{
+        color:blue; 
+        margin-left:25px; 
+        cursor:pointer;
+    }
     button img{
         width: 15px;
         height: 20px;
@@ -329,14 +336,25 @@ export default {
         height: 100px;
     }
 
+    .article-insert button{
+        background-color:cornflowerblue;
+        color:white;
+        font-weight: bold;
+        width: 10%;
+        margin-right: 20px;
+        padding: 3px;
+    }
+
     .user-name{
         font-weight: bold;
+        font-size: 15px;
     }
 
     .pre-text{
         white-space: pre-line;
         word-wrap: break-word;
         width: 100%;
+        word-break: keep-all;
         /* background-color: brown; */
         /* text-align: left; */
     }
