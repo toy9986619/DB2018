@@ -83,6 +83,18 @@
         </tbody>
     </table>
     </div>
+
+    <div v-if="isReady && card.evolution">
+        <EvolutionNode v-if="card.evolution.evolve_parent"
+            :node="card.evolution.evolve_parent"
+            :cardId="card.evolution.evolve_parent.id"></EvolutionNode>
+        BASE: <img :src="'/img/card/no' + card.id + '_icon.png'">
+        <EvolutionNode v-if="card.evolution.evolve.length > 0"
+            v-for="child in card.evolution.evolve"
+            :key="child.id"
+            :node="child"
+            :cardId="child.data_card_id"></EvolutionNode>
+    </div>
     
     <ArticleReply :card-id="this.cardId" :user-name="this.userName"></ArticleReply>
 
@@ -107,6 +119,7 @@
 <script>
 import modal from './Modal.vue'
 import ArticleReply from "./CardInfo_Article.vue";
+import EvolutionNode from "./CardInfo_Evolution.vue";
 
 export default {
     
@@ -122,13 +135,10 @@ export default {
 
     methods: {
         init: function(){
-            console.log(this.cardId);
-            console.log(this.userName);
             let self = this;
             this.axios.get('/card/' + this.cardId)
                 .then(function(response){
                     self.card = response.data.card;
-                    console.log(self.card);
                     self.isReady = true;
                 })
                 .catch(function(response){
@@ -139,11 +149,11 @@ export default {
 
     mounted: function(){
         this.init();
-        
+
     },
     
     components: {
-        modal, ArticleReply
+        modal, ArticleReply, EvolutionNode
     }
 }
 </script>
