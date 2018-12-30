@@ -207,8 +207,10 @@ export default {
             })
             .then(function(response){
                 self.showArticleModal = false;
-                console.log(response.data.article);
+                // console.log(response.data.article);
                 self.article.push(response.data.article);
+                self.article_number+=1;
+                
                 self.article_content = null;
                 self.showReplyInsert.push(false);
                 self.showReplyTable.push(false);
@@ -232,6 +234,7 @@ export default {
                 url: '/article/del/'+article_id,
             }).then(function(response){
                 self.article.splice(index, 1);
+                self.article_number-=1;
                 console.log("完成");
             }).catch(function(response){
                 console.log(response);
