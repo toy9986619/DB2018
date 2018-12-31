@@ -1,14 +1,11 @@
 <template>
     <div>
-        <node v-if="node.evolve_parent && node.data_card_id"
-            :node="node.evolve_parent"
-            :cardId="node.evolve_parent.data_card_id"></node>
-        <img :src="getImageUrl()">
+        <label v-if="cardId == node.data_card_id">BASE:</label><img :src="getImageUrl()">
         <node v-if="node.evolve"
             v-for="child in node.evolve"
             :key="child.id"
             :node="child"
-            :cardId="child.data_card_id"></node>
+            :cardId="cardId"></node>
     </div>
 </template>
 
@@ -29,7 +26,7 @@ export default {
 
     methods: {
         getImageUrl: function(){
-            return '/img/card/no' + this.cardId + '_icon.png';
+            return '/img/card/no' + this.node.data_card_id + '_icon.png';
         }
     },
 

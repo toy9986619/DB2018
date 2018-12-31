@@ -85,15 +85,9 @@
     </div>
 
     <div v-if="isReady && card.evolution">
-        <EvolutionNode v-if="card.evolution.evolve_parent"
-            :node="card.evolution.evolve_parent"
-            :cardId="card.evolution.evolve_parent.id"></EvolutionNode>
-        BASE: <img :src="'/img/card/no' + card.id + '_icon.png'">
-        <EvolutionNode v-if="card.evolution.evolve.length > 0"
-            v-for="child in card.evolution.evolve"
-            :key="child.id"
-            :node="child"
-            :cardId="child.data_card_id"></EvolutionNode>
+        <EvolutionNode v-if="card.evolution"
+            :node="card.evolution"
+            :cardId="card.id"></EvolutionNode>
     </div>
     
     <ArticleReply :card-id="this.cardId" :user-name="this.userName"></ArticleReply>
