@@ -14,6 +14,19 @@ class EvolutionService
     }
 
     public function getEvolutionByCardId($id){
-        return $this->evolutionRepo->getEvolutionByCardId($id);
+        // return $this->evolutionRepo->getEvolutionByCardId($id);
+        $topParent = $this->getTopParentByCardId($id);
+        return $this->evolutionRepo->getEvolveByCardId($topParent['data_card_id']);
+    }
+
+    public function getTopParentByCardId($id){
+        $parent = $this->evolutionRepo->getParentByCardId($id)->toArray();
+        $node = $parent;
+
+        while(!is_null($node['parent_id'])){
+            $node = $node['evolve_parent'];
+        }
+
+        return $node;
     }
 }

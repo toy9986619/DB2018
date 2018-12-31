@@ -19,4 +19,18 @@ class EvolutionRepository
                     ->where('data_card_id', '=', $id)
                     ->first();
     }
+
+    public function getParentByCardId($id){
+        return $this->evolution
+                    ->with('evolveParent')
+                    ->where('data_card_id', '=', $id)
+                    ->first();
+    }
+
+    public function getEvolveByCardId($id){
+        return $this->evolution
+                    ->with('evolve')
+                    ->where('data_card_id', '=', $id)
+                    ->first();
+    }
 }
