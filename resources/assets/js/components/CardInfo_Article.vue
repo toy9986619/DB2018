@@ -329,7 +329,7 @@ export default {
     }
 
     .article-insert textarea{
-        height: 100px;
+        height: 108px;
     }
 
     .article-insert button{
@@ -338,6 +338,20 @@ export default {
         font-weight: bold;
         width: 10%;
         margin-right: 20px;
+        padding: 3px;
+    }
+
+    .reply-footer textarea{
+        height: 68px;
+    }
+
+    .reply-footer button{
+        background-color:cornflowerblue;
+        color:white;
+        font-weight: bold;
+        width: 8%;
+        float: right;
+        margin: 2px;
         padding: 3px;
     }
 
