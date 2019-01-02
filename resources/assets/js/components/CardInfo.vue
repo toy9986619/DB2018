@@ -1,5 +1,10 @@
 <template>
-<div class="content" v-if="isReady">
+<div class="content" >
+<div v-if="Object.keys(card).length === 0">
+    <span>查無資料</span>
+</div>
+
+<div v-if="isReady">
     <div>
     <table align="center" >
         <tbody>
@@ -34,7 +39,8 @@
                 <td>種族: {{card.race.name}}</td>
             </tr>
             <tr>
-                <td colspan="2">經驗曲線: {{card.exp_curve}} COST: {{card.cost}}</td>
+                <td>經驗曲線: {{card.exp_curve}}</td>
+                <td>COST: {{card.cost}}</td>
             </tr>
             <tr>
                 <td colspan="2">滿等所需經驗值: {{card.max_exp}}</td>
@@ -91,7 +97,7 @@
     </div>
     
     <ArticleReply :card-id="this.cardId" :user="[this.userName, this.userType]" align="center"></ArticleReply>
-
+</div>
 </div>
 </template>
 
@@ -132,8 +138,11 @@ export default {
             let self = this;
             this.axios.get('/card/' + this.cardId)
                 .then(function(response){
-                    self.card = response.data.card;
-                    self.isReady = true;
+                    if(response.data.card){
+                        self.card = response.data.card;
+                        self.isReady = true;
+                    }
+                    
                 })
                 .catch(function(response){
                     console.log(response);

@@ -26,13 +26,15 @@ class CardService
      */
     public function getCardById($id){
         $card = $this->cardRepo->getCardById($id);
-        $card['evolution'] = $this->evolutionService->getEvolutionByCardId($id);
+        if(!empty($card)){
+            $card['evolution'] = $this->evolutionService->getEvolutionByCardId($id);
+        }
 
         return $card;
     }
 
     /**
-     * 依據id 取得編輯表單的卡片資量
+     * 依據id 取得編輯表單的卡片資料
      *
      * @param int $id
      * @return App\Models\Card
@@ -53,8 +55,10 @@ class CardService
      */
     public function getCardsList($filter_data){
         $attribute = empty($filter_data['attribute']) ? "" : $filter_data['attribute'];
+        $race = empty($filter_data['race']) ? "" : $filter_data['race'];
+        $series = empty($filter_data['series']) ? "" : $filter_data['series'];
 
-        $cards = $this->cardRepo->getCardsList($attribute);
+        $cards = $this->cardRepo->getCardsList($attribute, $race, $series);
 
         return $cards;
     }

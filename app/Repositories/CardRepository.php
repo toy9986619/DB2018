@@ -52,11 +52,19 @@ class CardRepository
      *
      * @return void
      */
-    public function getCardsList($attribute){
+    public function getCardsList($attribute, $race, $series){
         $query = $this->card->select('id', 'name');
         
         if($attribute != ""){
             $query = $query->where('attribute', '=', $attribute);
+        }
+
+        if($race != ""){
+            $query = $query->where('race_id', '=', $race);
+        }
+
+        if($series != ""){
+            $query = $query->where('series_id', '=', $series);
         }
         
         return $query->paginate(100);
