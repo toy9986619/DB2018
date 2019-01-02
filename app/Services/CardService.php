@@ -3,14 +3,19 @@
 namespace App\Services;
 
 use App\Repositories\CardRepository;
+use App\Services\EvolutionService;
 
 class CardService
 {   
     /** @var CardRepository */
     protected $cardRepo;
 
-    public function __construct(CardRepository $cardRepo){
+    /** @var EvolutionService */
+    protected $evolutionService;
+
+    public function __construct(CardRepository $cardRepo, EvolutionService $evolutionService){
         $this->cardRepo = $cardRepo;
+        $this->evolutionService = $evolutionService;
     }
 
     /**
@@ -21,6 +26,7 @@ class CardService
      */
     public function getCardById($id){
         $card = $this->cardRepo->getCardById($id);
+        $card['evolution'] = $this->evolutionService->getEvolutionByCardId($id);
 
         return $card;
     }
