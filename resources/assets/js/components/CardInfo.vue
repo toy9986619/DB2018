@@ -84,13 +84,13 @@
     </table>
     </div>
 
-    <div v-if="isReady && card.evolution">
+    <div v-if="isReady && card.evolution" align="center">
         <EvolutionNode v-if="card.evolution"
             :node="card.evolution"
             :cardId="card.id"></EvolutionNode>
     </div>
     
-    <ArticleReply :card-id="this.cardId" :user-name="this.userName" align="center"></ArticleReply>
+    <ArticleReply :card-id="this.cardId" :user="[this.userName, this.userType]" align="center"></ArticleReply>
 
 </div>
 </template>
@@ -117,7 +117,7 @@ import EvolutionNode from "./CardInfo_Evolution.vue";
 
 export default {
     
-    props: ['cardId','userName'],
+    props: ['cardId','userName','userType'],
 
     data () {
         return {

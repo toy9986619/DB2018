@@ -1,6 +1,7 @@
 <template>
-    <div>
-        <img :src="getImageUrl()" :class="{base: cardId == node.data_card_id}">
+    <div class="evolution">
+        <a :href="'/gallery/'+node.data_card_id"><img :src="getImageUrl()" :class="{base: cardId == node.data_card_id}"></a>
+        <img v-if="1" src="/img/evolution-arrow/right-arrow.png">
         <node v-if="node.evolve"
             v-for="child in node.evolve"
             :key="child.id"
@@ -37,6 +38,17 @@ export default {
 </script>
 
 <style>
+    .evolution{
+        /* margin: 5px; */
+        display: inline-block;
+        vertical-align: middle;
+    }
+
+    .evolution img{
+        display:inline-block;
+        margin: 20px 7.5px 10px 7.5px;
+    }
+
     .base{
         border-radius: 50%;
         border: 3px solid blue

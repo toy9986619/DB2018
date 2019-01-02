@@ -8,12 +8,12 @@
                     <!-- Article -->
                     <div>
                         <p style="float:left;" class="user-name">{{article.user.name}}&nbsp;&nbsp;</p><p style="color:blue;float:left;">{{article.updated_at}}</p>
-                        <div v-if="userName == article.user.name" class="icon">
-                            <button id="edit-article-model" @click="showArticleEdit(article.id, article_index)">
-                                <img src="/img/article/edit.png" alt="編輯文章">
+                        <div v-if="user[0] == article.user.name || user[1] =='admin'" class="icon">
+                            <button id="edit-article-model" v-if="user[0] == article.user.name" @click="showArticleEdit(article.id, article_index)">
+                                <img src="/img/article/edit.png" alt="編輯文章" title="編輯">
                             </button>
                             <button id="del-article-model" @click="delArticle(article.id, article_index)">
-                                <img src="/img/article/remove.png" alt="刪除文章">
+                                <img src="/img/article/remove.png" alt="刪除文章" title="刪除" border="0">
                             </button>
                         </div>
                         <br><br>
@@ -34,8 +34,8 @@
                     <div>
                         <p style="float:left;"  class="user-name">{{reply.user.name}}&nbsp;&nbsp;</p><p style="color:blue;float:left;">{{article.updated_at}}</p>
                         <button id="del-reply-model" @click="delReply(reply.id, article_index, reply_index)" 
-                                v-if="userName == article.user.name" style="float:right;">
-                            <img src="/img/article/remove.png" alt="刪除">
+                                v-if="user[0] == article.user.name || user[1] =='admin'" style="float:right;">
+                            <img src="/img/article/remove.png" alt="刪除" title="刪除">
                         </button>
                         <br><br>
                         <p  class="pre-text">{{reply.content}}</p>
@@ -45,7 +45,7 @@
             <tr class="reply-footer" v-if="showReplyInsert[article_index]">
                 <td>
                     <form onsubmit="return false;" style="margin-top:8px;margin-left:10px;">
-                        <textarea @blur="setNewReply(userName, article.id, new_reply_list[article_index])" v-model="new_reply_list[article_index]"></textarea>
+                        <textarea @blur="setNewReply(user[0], article.id, new_reply_list[article_index])" v-model="new_reply_list[article_index]"></textarea>
                         <button @click="ReplyInsert(article_index)">回應</button>
                     </form>
                 </td>
@@ -53,13 +53,13 @@
         </table>
         <div  class="article-insert">
             <form onsubmit="return false;" style="margin-top:35px;margin-left:10px;">
-                <textarea  @blur="setNewArticle(userName, cardId, article_content)" v-model="article_content"></textarea>
+                <textarea  @blur="setNewArticle(user[0], cardId, article_content)" v-model="article_content"></textarea>
                 <div align="right">
-                    <button @click="ArticleInsert()" v-if="userName != 'Guest'">發怖</button>
-                    <button @click="Alert()" v-if="userName == 'Guest'">發怖</button>
+                    <button @click="ArticleInsert()" v-if="user[1] != 'guest'">發怖</button>
+                    <button @click="Alert()" v-if="user[1] == 'guest'">發怖</button>
                 </div>
             </form>
-            <p align="left" style="font-weight:bold;">發表留言的身分:&nbsp;{{userName}}</p>
+            <p align="left" style="font-weight:bold;">發表留言的身分:&nbsp;{{user[0]}}</p>
         </div>
 
     </div>
@@ -72,7 +72,7 @@
 
         <div slot="body">
             <form>
-                <div class="row">{{userName}}</div>
+                <div class="row">{{user[0]}}</div>
                 <div class="row"><label>內容</label><textarea v-model="new_article.content"></textarea></div>
             </form>
         </div>
@@ -89,7 +89,7 @@
 import modal from "./Modal.vue";
 
 export default {
-    props: ['cardId', 'userName'],
+    props: ['cardId', 'user'],
 
     data: function(){
         return {
@@ -112,7 +112,7 @@ export default {
     methods: {
         init: function(){
             console.log(this.cardId);
-            console.log(this.userName);
+            console.log(this.user);
             let self = this;
             this.axios.get('/article/' + this.cardId)
                 .then(function(response){
@@ -137,7 +137,7 @@ export default {
         },
 
         showReplyInsertModel: function(index){
-            if(this.userName == 'Guest'){
+            if(this.user[1] == 'guest'){
                 alert("尚未登入");
             }
             else
@@ -156,7 +156,7 @@ export default {
         showArticleEdit: function(article_id, index){
             let self = this;
             this.articleIndex = index
-            this.setNewArticle(this.userName, this.cardId);
+            this.setNewArticle(this.user[0], this.cardId);
 
             this.axios.get('/article/edit/'+article_id)
                 .then(function(response){
