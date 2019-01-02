@@ -1,7 +1,7 @@
 <template>
     <div class="evolution">
+        <img v-if="node.parent_id" src="/img/evolution-arrow/right-arrow.png">
         <a :href="'/gallery/'+node.data_card_id"><img :src="getImageUrl()" :class="{base: cardId == node.data_card_id}"></a>
-        <img v-if="1" src="/img/evolution-arrow/right-arrow.png">
         <node v-if="node.evolve"
             v-for="child in node.evolve"
             :key="child.id"
