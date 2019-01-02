@@ -21,7 +21,7 @@
         </ul>
     </div>
 
-    <div class="page">
+    <div class="page" align="center">
         <span v-for="i in page_data.last_page" :key="i" 
             @click="cardFilter(i)"
             :class="{'page-nonactive': page_data.current_page != i}">{{ i }}</span>
