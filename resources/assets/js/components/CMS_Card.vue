@@ -161,7 +161,8 @@ export default {
             this.axios.get('/card', {
                     params:{
                         'attribute':"",
-                        'page':page
+                        'page':page,
+                        'pageinate':50
                     }
                 })
                 .then(function(response){

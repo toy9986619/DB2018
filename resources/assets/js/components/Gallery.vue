@@ -101,7 +101,8 @@ export default {
                         attribute: self.attribute_selected,
                         race: self.race_selected,
                         series: self.series_selected,
-                        page: page
+                        page: page,
+                        pageinate: 100
                     }
                 })
                 .then(function(response){

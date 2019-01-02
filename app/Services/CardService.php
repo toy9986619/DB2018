@@ -57,8 +57,9 @@ class CardService
         $attribute = empty($filter_data['attribute']) ? "" : $filter_data['attribute'];
         $race = empty($filter_data['race']) ? "" : $filter_data['race'];
         $series = empty($filter_data['series']) ? "" : $filter_data['series'];
+        $pageinate = empty($filter_data['pageinate']) ? 50 : $filter_data['pageinate'];
 
-        $cards = $this->cardRepo->getCardsList($attribute, $race, $series);
+        $cards = $this->cardRepo->getCardsList($attribute, $race, $series, $pageinate);
 
         return $cards;
     }

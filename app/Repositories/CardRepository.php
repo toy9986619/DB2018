@@ -52,7 +52,7 @@ class CardRepository
      *
      * @return void
      */
-    public function getCardsList($attribute, $race, $series){
+    public function getCardsList($attribute, $race, $series, $paginate){
         $query = $this->card->select('id', 'name');
         
         if($attribute != ""){
@@ -67,7 +67,7 @@ class CardRepository
             $query = $query->where('series_id', '=', $series);
         }
         
-        return $query->paginate(100);
+        return $query->paginate($paginate);
     }
 
     public function getCardDataCount(){
