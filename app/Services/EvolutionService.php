@@ -20,7 +20,10 @@ class EvolutionService
     }
 
     public function getTopParentByCardId($id){
-        $parent = $this->evolutionRepo->getParentByCardId($id)->toArray();
+        $parent = $this->evolutionRepo->getParentByCardId($id);
+        if (!empty($parent)) {
+            $parent = $parent->toArray();
+        }
         $node = $parent;
 
         while(!is_null($node['parent_id'])){

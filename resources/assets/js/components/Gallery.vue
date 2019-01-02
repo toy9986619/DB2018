@@ -1,8 +1,12 @@
 <template>
 <div class="content">
     <div class="search-area">
+        <div class="card-id">
+            <span>卡片編號:</span>
+            <input type="text" v-model="search_id"/>
+        </div>
         <div class="attribute">
-            屬性: 
+            <span>屬性:</span> 
             <input type="radio" checked="checked" v-model="attribute_selected" v-on:change="cardFilter(0)" value="" /><label>不限</label>
             <input type="radio" v-model="attribute_selected" v-on:change="cardFilter(0)" value="火" /><label>火</label>
             <input type="radio" v-model="attribute_selected" v-on:change="cardFilter(0)" value="水" /><label>水</label>
@@ -21,7 +25,7 @@
         </ul>
     </div>
 
-    <div class="page" align="center">
+    <div class="page" align="center" v-if="page_data.last_page > 0">
         <span v-for="i in page_data.last_page" :key="i" 
             @click="cardFilter(i)"
             :class="{'page-nonactive': page_data.current_page != i}">{{ i }}</span>
@@ -34,7 +38,8 @@ export default {
     data () {
         return {
             page_data:{},
-            attribute_selected: ''
+            attribute_selected: '',
+            search_id:""
         }
     },
 
@@ -61,6 +66,38 @@ export default {
                 .catch(function(response){
                     console.log(response);
                 });
+        }
+    },
+
+    watch: {
+        search_id: function(value){
+            if(value){
+                let self = this;
+                this.axios.get('/card/' + self.search_id)
+                    .then((response) => {
+                        if(response.data.card){
+                            var data = response.data.card;
+                            self.page_data = {
+                                'total': 1,
+                                'data': [{
+                                    'id': data['id'],
+                                    'name': data['name']
+                                }],
+                                'last_page': 0
+                            }
+                        }else{
+                            self.page_data = {
+                                'total':0
+                            }
+                        }
+                    })
+                    .catch((response) => {
+                        console.log(response);
+                    });
+            }else{
+                this.cardFilter(0);
+            }
+            
         }
     },
 

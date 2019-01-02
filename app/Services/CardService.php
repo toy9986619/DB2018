@@ -26,13 +26,15 @@ class CardService
      */
     public function getCardById($id){
         $card = $this->cardRepo->getCardById($id);
-        $card['evolution'] = $this->evolutionService->getEvolutionByCardId($id);
-
+        if(!empty($card)){
+            $card['evolution'] = $this->evolutionService->getEvolutionByCardId($id);
+        }
+        
         return $card;
     }
 
     /**
-     * 依據id 取得編輯表單的卡片資量
+     * 依據id 取得編輯表單的卡片資料
      *
      * @param int $id
      * @return App\Models\Card
