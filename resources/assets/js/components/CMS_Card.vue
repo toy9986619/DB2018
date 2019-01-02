@@ -68,6 +68,8 @@
                         {{ series.name }}
                     </option>
                 </select></div>
+                <!-- <div class="row"><label>退化</label><input v-model="card.parent_id"/></div>
+                <div class="row"><label>進化</label><input v-model="card.child_id"/></div> -->
             </form>
         </div>
 

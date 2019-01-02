@@ -29,4 +29,29 @@ class EvolutionService
 
         return $node;
     }
+
+    public function getParent($id){
+        $parent = $this->evolutionRepo->getParent($id);
+
+        return $parent;
+    }
+
+    public function getChild($id){
+        $child = $this->evolutionRepo->getChild($id);
+
+        return $child;
+    }
+
+    public function insert($parent, $self, $child){
+        $this->evolutionRepo->insert($parent, $self, $child);
+
+    }
+
+    public function update($parent, $self, $child){
+        $this->evolutionRepo->update($parent, $self, $child);
+    }
+
+    public function del($id){
+        $this->evolutionRepo->del($id);
+    }
 }

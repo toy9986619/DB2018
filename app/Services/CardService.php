@@ -39,6 +39,8 @@ class CardService
      */
     public function getCardFormDataById($id){
         $card = $this->cardRepo->getCardFormDataById($id);
+        // $card['parent_id'] = $this->evolutionService->getParent($id);
+        // $card['child_id'] = $this->evolutionService->getChild($id); 
 
         return $card;
     }
@@ -72,7 +74,13 @@ class CardService
     public function insertCard($input_data){
         $card_data = $input_data['card'];
 
+        // $this->evolutionService->insert($card_data['parent_id'], $card_data['id'], $card_data['child_id']);
+
+        // unset($card_date['parent_id']);
+        // unset($card_data['child_id']);
+
         $this->cardRepo->insertCard($card_data);
+        
     }
 
     /**
@@ -85,10 +93,16 @@ class CardService
         $card_data = $input_data['card'];
 
         $id = $card_data['id'];
+
+        // $this->evolutionService->update($card_data['parent_id'], $id, $card_data['child_id']);
+
         unset($card_data['id']);
+        // unset($card_date['parent_id']);
+        // unset($card_data['child_id']);
         $update_data = $card_data;
 
         $this->cardRepo->updateCard($id, $update_data);
+        
     }
 
     /**
@@ -99,5 +113,7 @@ class CardService
      */
     public function deleteCard($id){
         $this->cardRepo->deleteCard($id);
+        // $this->evolutionService->del($id);
     }
+
 }
