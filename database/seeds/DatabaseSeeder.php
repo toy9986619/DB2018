@@ -17,5 +17,6 @@ class DatabaseSeeder extends Seeder
         $this->call(ActiveSkillSeeder::class);
         $this->call(LeaderSkillSeeder::class);
         $this->call(CardSeeder::class);
+        $this->call(EvolutionSeeder::class);
     }
 }
