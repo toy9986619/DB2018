@@ -1,6 +1,6 @@
 <template>
     <div>
-        <label v-if="cardId == node.data_card_id">BASE:</label><img :src="getImageUrl()">
+        <img :src="getImageUrl()" :class="{base: cardId == node.data_card_id}">
         <node v-if="node.evolve"
             v-for="child in node.evolve"
             :key="child.id"
@@ -37,5 +37,8 @@ export default {
 </script>
 
 <style>
-
+    .base{
+        border-radius: 50%;
+        border: 3px solid blue
+    }
 </style>
