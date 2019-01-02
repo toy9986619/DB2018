@@ -117,7 +117,7 @@ class CardController extends Controller
     {
         $del = $this->cardService->deleteCard($id);
 
-        // return response()->json(['status' => 'OK'], 200, $this->header);
-        return response()->json(['del_list'=>$del], 200);
+        return response()->json(['status' => 'OK'], 200, $this->header);
+        // return response()->json(['del_list'=>$del], 200);
     }
 }
