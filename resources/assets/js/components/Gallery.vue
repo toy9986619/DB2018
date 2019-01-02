@@ -7,12 +7,24 @@
         </div>
         <div class="attribute">
             <span>屬性:</span> 
-            <input type="radio" checked="checked" v-model="attribute_selected" v-on:change="cardFilter(0)" value="" /><label>不限</label>
-            <input type="radio" v-model="attribute_selected" v-on:change="cardFilter(0)" value="火" /><label>火</label>
-            <input type="radio" v-model="attribute_selected" v-on:change="cardFilter(0)" value="水" /><label>水</label>
-            <input type="radio" v-model="attribute_selected" v-on:change="cardFilter(0)" value="木" /><label>木</label>
-            <input type="radio" v-model="attribute_selected" v-on:change="cardFilter(0)" value="光" /><label>光</label>
-            <input type="radio" v-model="attribute_selected" v-on:change="cardFilter(0)" value="暗" /><label>暗</label>
+            <input type="radio" checked="checked" v-model="attribute_selected" value="" /><label>不限</label>
+            <input type="radio" v-model="attribute_selected" value="火" /><label>火</label>
+            <input type="radio" v-model="attribute_selected" value="水" /><label>水</label>
+            <input type="radio" v-model="attribute_selected" value="木" /><label>木</label>
+            <input type="radio" v-model="attribute_selected" value="光" /><label>光</label>
+            <input type="radio" v-model="attribute_selected" value="暗" /><label>暗</label>
+        </div>
+        <div class="race">
+            <span>種族:</span>
+            <select v-model="race_selected">
+                <option v-for="race in race_list_sort" :value="race.id" :key="race.id">{{ race.name }}</option>
+            </select>
+        </div>
+        <div class="series">
+            <span>類型:</span>
+            <select v-model="series_selected">
+                <option v-for="series in series_list_sort" :value="series.id" :key="series.id">{{ series.name }}</option>
+            </select>
         </div>
     </div>
     <div>
@@ -37,14 +49,20 @@
 export default {
     data () {
         return {
-            page_data:{},
-            attribute_selected: '',
+            page_data: {},
+            race_list: [],
+            series_list: [],
+            attribute_selected: "",
+            race_selected: 0,
+            series_selected: 0,
             search_id:""
         }
     },
 
     methods: {
         init: function(){
+            this.getSeriesList();
+            this.getRaceList();
             this.cardFilter();
         },
 
@@ -52,12 +70,38 @@ export default {
             return '/img/card/no' + i + '_icon.png';
         },
 
+        getSeriesList: function(){
+            let self = this;
+            this.axios.get('/series')
+                .then(function(response){
+                    self.series_list = response.data.list;
+                    self.series_list.push({id: 0, name:"不限"});
+                })
+                .catch(function(response){
+                    console.log(response);
+                })
+        },
+
+        getRaceList: function(){
+            let self = this;
+            this.axios.get('/race')
+                .then(function(response){
+                    self.race_list = response.data.list;
+                    self.race_list.push({id: 0, name:"不限"});
+                })
+                .catch(function(response){
+                    console.log(response);
+                })
+        },
+
         cardFilter: function(page){
             let self = this;
             this.axios.get('/card', {
                     params:{
                         attribute: self.attribute_selected,
-                        page:page
+                        race: self.race_selected,
+                        series: self.series_selected,
+                        page: page
                     }
                 })
                 .then(function(response){
@@ -98,6 +142,30 @@ export default {
                 this.cardFilter(0);
             }
             
+        },
+
+        attribute_selected: function(){
+            this.cardFilter(0)
+        },
+        series_selected: function(){
+            this.cardFilter(0)
+        },
+        race_selected: function(){
+            this.cardFilter(0)
+        }
+    },
+
+    computed: {
+        race_list_sort: function(){
+            return this.race_list.sort(function(a, b){
+                return a.id - b.id;
+            })
+        },
+
+        series_list_sort: function(){
+            return this.series_list.sort(function(a, b){
+                return a.id - b.id;
+            })
         }
     },
 
