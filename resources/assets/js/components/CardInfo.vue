@@ -1,5 +1,10 @@
 <template>
-<div class="content" v-if="isReady">
+<div class="content" >
+<div v-if="Object.keys(card).length === 0">
+    <span>查無資料</span>
+</div>
+
+<div v-if="isReady">
     <div>
     <table align="center" >
         <tbody>
@@ -34,7 +39,8 @@
                 <td>種族: {{card.race.name}}</td>
             </tr>
             <tr>
-                <td colspan="2">經驗曲線: {{card.exp_curve}} COST: {{card.cost}}</td>
+                <td>經驗曲線: {{card.exp_curve}}</td>
+                <td>COST: {{card.cost}}</td>
             </tr>
             <tr>
                 <td colspan="2">滿等所需經驗值: {{card.max_exp}}</td>
@@ -83,9 +89,15 @@
         </tbody>
     </table>
     </div>
-    
-    <ArticleReply :card-id="this.cardId" :user-name="this.userName" align="center"></ArticleReply>
 
+    <div v-if="isReady && card.evolution" align="center">
+        <EvolutionNode v-if="card.evolution"
+            :node="card.evolution"
+            :cardId="card.id"></EvolutionNode>
+    </div>
+    
+    <ArticleReply :card-id="this.cardId" :user="[this.userName, this.userType]" align="center"></ArticleReply>
+</div>
 </div>
 </template>
 
@@ -107,10 +119,11 @@
 <script>
 import modal from './Modal.vue'
 import ArticleReply from "./CardInfo_Article.vue";
+import EvolutionNode from "./CardInfo_Evolution.vue";
 
 export default {
     
-    props: ['cardId','userName'],
+    props: ['cardId','userName','userType'],
 
     data () {
         return {
@@ -122,14 +135,14 @@ export default {
 
     methods: {
         init: function(){
-            console.log(this.cardId);
-            console.log(this.userName);
             let self = this;
             this.axios.get('/card/' + this.cardId)
                 .then(function(response){
-                    self.card = response.data.card;
-                    console.log(self.card);
-                    self.isReady = true;
+                    if(response.data.card){
+                        self.card = response.data.card;
+                        self.isReady = true;
+                    }
+                    
                 })
                 .catch(function(response){
                     console.log(response);
@@ -139,11 +152,11 @@ export default {
 
     mounted: function(){
         this.init();
-        
+
     },
     
     components: {
-        modal, ArticleReply
+        modal, ArticleReply, EvolutionNode
     }
 }
 </script>

@@ -68,6 +68,8 @@
                         {{ series.name }}
                     </option>
                 </select></div>
+                <!-- <div class="row"><label>退化</label><input v-model="card.parent_id"/></div>
+                <div class="row"><label>進化</label><input v-model="card.child_id"/></div> -->
             </form>
         </div>
 
@@ -159,7 +161,8 @@ export default {
             this.axios.get('/card', {
                     params:{
                         'attribute':"",
-                        'page':page
+                        'page':page,
+                        'pageinate':50
                     }
                 })
                 .then(function(response){
