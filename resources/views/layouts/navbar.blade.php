@@ -15,7 +15,7 @@
                     </button>
     
                     <!-- Branding Image -->
-                    <a class="navbar-brand" href="{{ url('/gallery') }}">
+                    <a class="navbar-brand" href="{{ url('/') }}">
                         ToS DataBase
                     </a>
                 </div>
