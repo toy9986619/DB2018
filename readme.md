@@ -2,18 +2,24 @@
 
 TKU 2018資料庫課程期末作品
 
-## 功能
+### 功能
+
 * 卡片目錄頁面
 * 卡片詳細資料頁面，並提供留言功能
 * 簡易的管理員後台頁面，可對會員及卡片做管理
 
-## 更新資訊
+### 更新資訊
 ver 1.1
 * 卡片資訊的進化鍊顯示實作
 * 更多的卡片目錄過濾功能
 
-# 安裝
-## 環境
+### 尚未實作
+* 卡片管理頁面可上傳圖片，管理該卡片的圖片資料
+* 卡片管理頁面可編輯進化鍊資訊
+* 管理頁面整理主動技能、被動技能...等等屬性
+
+## 安裝
+### 環境
 * PHP >= 7.0
 * Laravel 5.2
 * Vue.js 2.5
@@ -22,22 +28,17 @@ ver 1.1
 * npm
 * gulp & Laravel Elixir
 
-## 尚未實作
-* 卡片管理頁面可上傳圖片，管理該卡片的圖片資料
-* 卡片管理頁面可編輯進化鍊資訊
-* 管理頁面整理主動技能、被動技能...等等屬性
-
-## 重建專案
+### 重建專案
 
 1. 安裝php 套件
 ```bash
-# command line
+# command line
 composer install
 ```
 
 2. 安裝JavaScript 套件
 ```bash
-# command line
+# command line
 npm install
 ```
 
@@ -104,5 +105,5 @@ php artisan serve --port={your-port-number}
 > Laravel development server started on http://localhost:8888/
 ```
 
-之後開啟上述所得到的網址，即可獲得類似下圖頁面
+之後開啟上述所得到的網址，即可獲得類似下圖頁面
 ![](https://i.imgur.com/NVVJloA.png)
