@@ -12,10 +12,6 @@ class Card extends BaseModel
         'max_hp', 'max_atk', 'max_rec', 'active_skill_id', 'leader_skill_id'
     ];
 
-    // protected $hidden = [
-    //     'race_id', 'series_id', 'active_skill_id', 'leader_skill_id',
-    // ];
-
     /**
      * 取得 種族 模型
      *

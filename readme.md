@@ -1,27 +1,108 @@
-# Laravel PHP Framework
+# 神魔角色查詢資料網頁
 
-[![Build Status](https://travis-ci.org/laravel/framework.svg)](https://travis-ci.org/laravel/framework)
-[![Total Downloads](https://poser.pugx.org/laravel/framework/d/total.svg)](https://packagist.org/packages/laravel/framework)
-[![Latest Stable Version](https://poser.pugx.org/laravel/framework/v/stable.svg)](https://packagist.org/packages/laravel/framework)
-[![Latest Unstable Version](https://poser.pugx.org/laravel/framework/v/unstable.svg)](https://packagist.org/packages/laravel/framework)
-[![License](https://poser.pugx.org/laravel/framework/license.svg)](https://packagist.org/packages/laravel/framework)
+TKU 2018資料庫課程期末作品
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable, creative experience to be truly fulfilling. Laravel attempts to take the pain out of development by easing common tasks used in the majority of web projects, such as authentication, routing, sessions, queueing, and caching.
+## 功能
+* 卡片目錄頁面
+* 卡片詳細資料頁面，並提供留言功能
+* 簡易的管理員後台頁面，可對會員及卡片做管理
 
-Laravel is accessible, yet powerful, providing tools needed for large, robust applications. A superb inversion of control container, expressive migration system, and tightly integrated unit testing support give you the tools you need to build any application with which you are tasked.
+## 更新資訊
+ver 1.1
+* 卡片資訊的進化鍊顯示實作
+* 更多的卡片目錄過濾功能
 
-## Official Documentation
+# 安裝
+## 環境
+* PHP >= 7.0
+* Laravel 5.2
+* Vue.js 2.5
+* MariaDB 10.2 (MySQL 5.7)
+* composer
+* npm
+* gulp & Laravel Elixir
 
-Documentation for the framework can be found on the [Laravel website](http://laravel.com/docs).
+## 尚未實作
+* 卡片管理頁面可上傳圖片，管理該卡片的圖片資料
+* 卡片管理頁面可編輯進化鍊資訊
+* 管理頁面整理主動技能、被動技能...等等屬性
 
-## Contributing
+## 重建專案
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](http://laravel.com/docs/contributions).
+1. 安裝php 套件
+```bash
+# command line
+composer install
+```
 
-## Security Vulnerabilities
+2. 安裝JavaScript 套件
+```bash
+# command line
+npm install
+```
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell at taylor@laravel.com. All security vulnerabilities will be promptly addressed.
+3. 設定.env file
+```bash
+# command line
+cp .env.example .env
+php artisan key:generate
+```
 
-## License
+4. 設定連接資料庫
 
-The Laravel framework is open-sourced software licensed under the [MIT license](http://opensource.org/licenses/MIT).
+打開 {project dir}/.env ，找尋下列內容並作設定
+```bash
+# .env 檔案
+
+# 設定DB driver，不用動
+DB_CONNECTION=mysql
+
+# 連接localhost DB
+DB_HOST=127.0.0.1
+
+# 連接localhost DB，請跟你環境下mysql所使用的port 相同
+DB_PORT=3306
+
+# 設定使用的資料庫名稱 (e.g. DBProject2018)
+DB_DATABASE={your-dbname}
+
+# 設定資料庫使用者帳號密碼，請替換成你的帳密
+DB_USERNAME={your-db-username}
+DB_PASSWORD={your-db-password}
+```
+
+5. 建立資料庫，進行遷移與資料填充
+
+先透過mysql 一個資料庫，名稱與上面的.env file 所寫的資料庫名稱相同
+
+編碼設定為utf-8
+![](https://i.imgur.com/8oDveb1.png)
+
+於專案根目錄下依序執行下述內容
+```bash
+# command line
+
+# 更新composer autoload
+composer dump-autoload
+
+# migrate 資料庫遷移
+php artisan migrate
+
+# seed 資料填充
+php artisan db:seed
+```
+
+6. 啟動開發測試環境
+```bash
+# command line
+php artisan serve
+
+# 預設會是8080 port，若有需要更換port 可用下述指令
+php artisan serve --port={your-port-number}
+
+# 回應結果
+> Laravel development server started on http://localhost:8888/
+```
+
+之後開啟上述所得到的網址，即可獲得類似下圖頁面
+![](https://i.imgur.com/NVVJloA.png)
