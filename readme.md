@@ -65,7 +65,7 @@ DB_HOST=127.0.0.1
 DB_PORT=3306
 
 # 設定使用的資料庫名稱 (e.g. DBProject2018)
-DB_DATABASE={your-dbname}
+DB_DATABASE={your-dbname}
 
 # 設定資料庫使用者帳號密碼，請替換成你的帳密
 DB_USERNAME={your-db-username}
@@ -98,7 +98,7 @@ php artisan db:seed
 # command line
 php artisan serve
 
-# 預設會是8080 port，若有需要更換port 可用下述指令
+# 預設會是8080 port，若有需要更換port 可用下述指令
 php artisan serve --port={your-port-number}
 
 # 回應結果
