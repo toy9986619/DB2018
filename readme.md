@@ -1,6 +1,7 @@
 # 神魔角色查詢資料網頁
 
 TKU 2018資料庫課程期末作品
+
 ![](https://i.imgur.com/7a80QsB.jpg)
 
 ### 功能
@@ -107,4 +108,5 @@ php artisan serve --port={your-port-number}
 ```
 
 之後開啟上述所得到的網址，即可獲得類似下圖頁面
+
 ![](https://i.imgur.com/RAqByUv.png)
