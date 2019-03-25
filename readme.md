@@ -1,6 +1,7 @@
 # 神魔角色查詢資料網頁
 
 TKU 2018資料庫課程期末作品
+![](https://i.imgur.com/7a80QsB.jpg)
 
 ### 功能
 
@@ -30,19 +31,19 @@ ver 1.1
 
 ### 重建專案
 
-1. 安裝php 套件
+1. 安裝 php 套件
 ```bash
 # command line
 composer install
 ```
 
-2. 安裝JavaScript 套件
+2. 安裝 JavaScript 套件
 ```bash
 # command line
 npm install
 ```
 
-3. 設定.env file
+3. 設定 .env file
 ```bash
 # command line
 cp .env.example .env
@@ -74,16 +75,16 @@ DB_PASSWORD={your-db-password}
 
 5. 建立資料庫，進行遷移與資料填充
 
-先透過mysql 一個資料庫，名稱與上面的.env file 所寫的資料庫名稱相同
+先透過 mysql 建立一個資料庫，名稱與上面的 .env file 所寫的資料庫名稱相同
 
-編碼設定為utf-8
+編碼設定為 utf-8
 ![](https://i.imgur.com/8oDveb1.png)
 
 於專案根目錄下依序執行下述內容
 ```bash
 # command line
 
-# 更新composer autoload
+# 更新 composer autoload
 composer dump-autoload
 
 # migrate 資料庫遷移
@@ -98,7 +99,7 @@ php artisan db:seed
 # command line
 php artisan serve
 
-# 預設會是8080 port，若有需要更換port 可用下述指令
+# 預設會是 8080 port，若有需要更換 port 可用下述指令
 php artisan serve --port={your-port-number}
 
 # 回應結果
@@ -106,4 +107,4 @@ php artisan serve --port={your-port-number}
 ```
 
 之後開啟上述所得到的網址，即可獲得類似下圖頁面
-![](https://i.imgur.com/NVVJloA.png)
+![](https://i.imgur.com/RAqByUv.png)
